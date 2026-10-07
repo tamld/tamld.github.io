@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Le Duc Tam (tamld) — AI Systems Architect & Enterprise IT Operations</title>
+  <meta name="description" content="11+ years bridging mission-critical enterprise IT operations with autonomous AI agent systems and deterministic governance harnesses.">
+  <meta name="author" content="Le Duc Tam (tamld)">
+  <link rel="canonical" href="https://tamld.github.io/">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tamld.github.io/">
+  <meta property="og:title" content="Le Duc Tam (tamld) — AI Systems Architect & Enterprise IT Operations">
+  <meta property="og:description" content="11+ years bridging mission-critical infrastructure with autonomous agentic harnesses. Physical evidence first. Zero marketing fluff.">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Machine-Readable Discovery Standard -->
+  <link rel="alternate" type="text/markdown" title="LLMs.txt" href="/llms.txt">
+  <link rel="alternate" type="text/markdown" title="LLMs Full Dossier" href="/llms-full.txt">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              bg: '#09090b',
+              surface: '#121215',
+              surfaceHover: '#18181b',
+              border: '#27272a',
+              borderHover: '#3f3f46',
+              accent: '#0ea5e9',
+              emerald: '#10b981',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #09090b; }
+    ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+
+    /* Terminal blinking cursor */
+    .term-cursor {
+      display: inline-block;
+      width: 8px;
+      height: 16px;
+      background-color: #38bdf8;
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    /* Subtle grid pattern background */
+    .bg-grid-pattern {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    }
+  </style>
+</head>
+<body class="bg-brand-bg text-zinc-300 font-sans antialiased min-h-screen selection:bg-sky-500/20 selection:text-sky-300 bg-grid-pattern">
+
+  <!-- Top Sticky Navigation & Live Status Bar -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-brand-bg/85 border-b border-brand-border px-4 lg:px-8 py-3 transition-all">
+    <div class="max-w-6xl mx-auto flex items-center justify-between gap-4">
+      
+      <!-- Brand & Status Indicator -->
+      <div class="flex items-center gap-3">
+        <a href="#top" class="font-mono text-sm font-semibold tracking-wider text-zinc-100 flex items-center gap-2 group">
+          <span class="w-2.5 h-2.5 rounded-full bg-brand-emerald animate-pulse"></span>
+          <span class="text-zinc-400 group-hover:text-zinc-100 transition-colors">tamld.dev</span>
+          <span class="text-zinc-600">/</span>
+          <span class="text-zinc-400 text-xs hidden sm:inline">sys.ops</span>
+        </a>
+        <div class="hidden md:flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-950/40 border border-emerald-800/40 text-emerald-400 text-xs font-mono">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+          Fleet: Dual-Plane UP
+        </div>
+      </div>
+
+      <!-- Quick Nav & Machine Endpoint CTA -->
+      <nav class="flex items-center gap-2 sm:gap-4 text-xs font-mono">
+        <a href="#systems" class="hidden md:inline-block text-zinc-400 hover:text-zinc-100 transition-colors py-1 px-2">Systems</a>
+        <a href="#architecture" class="hidden md:inline-block text-zinc-400 hover:text-zinc-100 transition-colors py-1 px-2">Matrix</a>
+        <a href="#invariants" class="hidden md:inline-block text-zinc-400 hover:text-zinc-100 transition-colors py-1 px-2">Invariants</a>
+        
+        <!-- LLM Machine Endpoint Trigger -->
+        <a href="/llms.txt" class="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-zinc-900 border border-brand-border text-sky-400 hover:border-sky-500/50 hover:bg-sky-950/20 transition-all font-mono" title="Read machine-readable summary (llms.txt standard)">
+          <i data-lucide="bot" class="w-3.5 h-3.5"></i>
+          <span>/llms.txt</span>
+        </a>
+
+        <!-- Social Icons -->
+        <div class="flex items-center gap-2 pl-2 border-l border-zinc-800">
+          <a href="https://github.com/tamld" target="_blank" rel="noopener noreferrer" class="p-1.5 rounded text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors" title="GitHub">
+            <i data-lucide="github" class="w-4 h-4"></i>
+          </a>
+          <a href="https://linkedin.com/in/tamld" target="_blank" rel="noopener noreferrer" class="p-1.5 rounded text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors" title="LinkedIn">
+            <i data-lucide="linkedin" class="w-4 h-4"></i>
+          </a>
+          <a href="mailto:ductam1828@gmail.com" class="p-1.5 rounded text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors" title="Email">
+            <i data-lucide="mail" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 lg:px-8 py-10 lg:py-16 space-y-20">
+
+    <!-- HERO SECTION: Dual-Track Reality -->
+    <section id="top" class="space-y-8">
+      <div class="space-y-4 max-w-4xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-brand-border text-xs font-mono text-zinc-300">
+          <span class="text-sky-400">#</span> Dual-Track Systems Engineer &amp; Architect
+        </div>
+        
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-zinc-100 leading-tight">
+          Le Duc Tam <span class="text-zinc-500 font-normal text-2xl sm:text-4xl">(tamld)</span>
+        </h1>
+        
+        <p class="text-lg sm:text-xl text-zinc-300 font-light leading-relaxed">
+          Bridging <span class="text-zinc-100 font-medium">11+ years of mission-critical enterprise IT operations</span> with <span class="text-sky-400 font-medium">autonomous AI agent systems</span> and deterministic governance harnesses.
+        </p>
+
+        <p class="text-sm text-zinc-400 leading-relaxed font-mono">
+          &gt; "I don't build systems to impress — I build them to quietly endure. Solid systems begin with steady hands, strict physical boundaries, and zero marketing fluff."
+        </p>
+      </div>
+
+      <!-- Quick Metrics Strip (High Contrast Bento) -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+        <div class="p-4 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-borderHover transition-colors">
+          <div class="text-2xl sm:text-3xl font-bold font-mono text-zinc-100">11+ <span class="text-sm font-normal text-zinc-500">Years</span></div>
+          <div class="text-xs text-zinc-400 mt-1">Enterprise IT Operations</div>
+          <div class="text-[11px] text-zinc-500 font-mono mt-0.5">SGH Asia Head of IT Ops</div>
+        </div>
+
+        <div class="p-4 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-borderHover transition-colors">
+          <div class="text-2xl sm:text-3xl font-bold font-mono text-sky-400">Zero <span class="text-sm font-normal text-zinc-500">WAN</span></div>
+          <div class="text-xs text-zinc-400 mt-1">Management Exposure</div>
+          <div class="text-[11px] text-zinc-500 font-mono mt-0.5">Tailscale Mesh + Traefik v3</div>
+        </div>
+
+        <div class="p-4 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-borderHover transition-colors">
+          <div class="text-2xl sm:text-3xl font-bold font-mono text-emerald-400">&lt; 2s</div>
+          <div class="text-xs text-zinc-400 mt-1">Fleet Triage Latency</div>
+          <div class="text-[11px] text-zinc-500 font-mono mt-0.5">VictoriaLogs LogSQL Core</div>
+        </div>
+
+        <div class="p-4 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-borderHover transition-colors">
+          <div class="text-2xl sm:text-3xl font-bold font-mono text-amber-400">100%</div>
+          <div class="text-xs text-zinc-400 mt-1">Deterministic Physics</div>
+          <div class="text-[11px] text-zinc-500 font-mono mt-0.5">Code Gates Over Prompting</div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-wrap items-center gap-3 pt-2">
+        <a href="#systems" class="px-4 py-2 rounded-md bg-zinc-100 text-zinc-950 font-medium text-xs sm:text-sm hover:bg-white transition-colors flex items-center gap-2">
+          <i data-lucide="layers" class="w-4 h-4"></i>
+          Explore Engineered Systems
+        </a>
+
+        <a href="/llms.txt" class="px-4 py-2 rounded-md bg-brand-surface border border-brand-border text-zinc-200 hover:text-sky-400 hover:border-sky-500/50 transition-all font-mono text-xs sm:text-sm flex items-center gap-2">
+          <i data-lucide="file-code" class="w-4 h-4 text-sky-400"></i>
+          View Machine Spec (/llms.txt)
+        </a>
+
+        <a href="https://github.com/tamld" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-md bg-brand-surface border border-brand-border text-zinc-400 hover:text-zinc-100 hover:border-brand-borderHover transition-colors font-mono text-xs sm:text-sm flex items-center gap-2">
+          <i data-lucide="github" class="w-4 h-4"></i>
+          github.com/tamld
+        </a>
+      </div>
+    </section>
+
+    <!-- LIVE INTERACTIVE TERMINAL WIDGET -->
+    <section class="space-y-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2 text-xs font-mono text-zinc-400">
+          <i data-lucide="terminal" class="w-4 h-4 text-sky-400"></i>
+          <span>Interactive Runtime Shell</span>
+        </div>
+        <div class="flex items-center gap-1.5 text-[11px] font-mono text-zinc-500">
+          <span>Click commands or type below</span>
+        </div>
+      </div>
+
+      <!-- Terminal Window -->
+      <div class="rounded-xl overflow-hidden border border-brand-border bg-[#0d0d10] shadow-2xl font-mono text-xs sm:text-sm">
+        <!-- Titlebar -->
+        <div class="flex items-center justify-between px-4 py-2.5 bg-zinc-900/90 border-b border-brand-border text-zinc-400">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-rose-500/80 inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
+            <span class="ml-2 text-xs text-zinc-400 hidden sm:inline">guest@tamld-harness:~ (zsh)</span>
+          </div>
+          <div class="text-[11px] text-zinc-500 flex items-center gap-2">
+            <span>zsh 5.9</span>
+            <span>|</span>
+            <span class="text-emerald-400">online</span>
+          </div>
+        </div>
+
+        <!-- Terminal Output Area -->
+        <div id="terminal-output" class="p-4 sm:p-5 space-y-3 min-h-[220px] max-h-[380px] overflow-y-auto text-zinc-300">
+          <div class="text-zinc-500">Type <span class="text-sky-400">help</span> to view available system commands, or click any chip below.</div>
+          <div>
+            <span class="text-emerald-400">guest@tamld:~$</span> <span class="text-zinc-100">tamld --whoami</span>
+          </div>
+          <div class="text-zinc-400 pl-4 border-l border-zinc-800 space-y-1">
+            <div><strong class="text-zinc-200">Name:</strong> Le Duc Tam (tamld)</div>
+            <div><strong class="text-zinc-200">Role:</strong> Head of IT Operations @ SGH Asia &amp; AI Systems Architect</div>
+            <div><strong class="text-zinc-200">Location:</strong> Ho Chi Minh City, Vietnam (UTC+7)</div>
+            <div><strong class="text-zinc-200">Discipline:</strong> First-Principles SRE, Zero-Trust DLP, Governed Agent Runtimes</div>
+          </div>
+        </div>
+
+        <!-- Interactive Input Line -->
+        <div class="p-3 sm:px-5 sm:py-3 bg-zinc-950/60 border-t border-brand-border flex items-center gap-2">
+          <span class="text-emerald-400 font-mono select-none">guest@tamld:~$</span>
+          <input id="terminal-input" type="text" autocomplete="off" spellcheck="false" 
+                 class="flex-1 bg-transparent text-zinc-100 placeholder-zinc-600 focus:outline-none font-mono text-xs sm:text-sm" 
+                 placeholder="type 'help', 'skills', 'projects', 'homelab'...">
+          <button id="terminal-run-btn" class="px-2 py-1 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 rounded text-xs font-mono transition-colors">
+            Run ↵
+          </button>
+        </div>
+
+        <!-- Quick Command Chips -->
+        <div class="px-4 py-2 bg-zinc-900/40 border-t border-brand-border/60 flex flex-wrap items-center gap-2 text-xs">
+          <span class="text-zinc-500 font-mono text-[11px]">Quick:</span>
+          <button onclick="runCommand('tamld --whoami')" class="px-2 py-0.5 rounded bg-zinc-800/80 hover:bg-zinc-700 text-sky-300 font-mono text-[11px] transition-colors">--whoami</button>
+          <button onclick="runCommand('tamld --skills')" class="px-2 py-0.5 rounded bg-zinc-800/80 hover:bg-zinc-700 text-sky-300 font-mono text-[11px] transition-colors">--skills</button>
+          <button onclick="runCommand('tamld --homelab')" class="px-2 py-0.5 rounded bg-zinc-800/80 hover:bg-zinc-700 text-sky-300 font-mono text-[11px] transition-colors">--homelab</button>
+          <button onclick="runCommand('tamld --projects')" class="px-2 py-0.5 rounded bg-zinc-800/80 hover:bg-zinc-700 text-sky-300 font-mono text-[11px] transition-colors">--projects</button>
+          <button onclick="runCommand('tamld --contact')" class="px-2 py-0.5 rounded bg-zinc-800/80 hover:bg-zinc-700 text-sky-300 font-mono text-[11px] transition-colors">--contact</button>
+          <button onclick="runCommand('clear')" class="px-2 py-0.5 rounded bg-zinc-800/80 hover:bg-zinc-700 text-zinc-400 font-mono text-[11px] transition-colors">clear</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- DUAL-TRACK COMPETENCY MATRIX -->
+    <section id="architecture" class="space-y-6">
+      <div class="space-y-2">
+        <div class="inline-flex items-center gap-2 text-xs font-mono text-sky-400 uppercase tracking-wider">
+          <i data-lucide="cpu" class="w-4 h-4"></i>
+          Architecture Foundation
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-zinc-100 tracking-tight">The Dual-Track Matrix</h2>
+        <p class="text-zinc-400 text-sm max-w-3xl">
+          Enterprise infrastructure stability and frontier AI agent velocity are not opposites. Hard operational engineering makes autonomous agents reliable.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Track 1: IT Ops -->
+        <div class="p-6 rounded-xl bg-brand-surface border border-brand-border hover:border-brand-borderHover transition-all space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <div class="p-2 rounded-lg bg-zinc-800 text-amber-400">
+                <i data-lucide="server" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h3 class="font-semibold text-zinc-100">Enterprise IT Operations &amp; SRE</h3>
+                <p class="text-xs text-zinc-500 font-mono">11+ Years Bare-Metal Foundation</p>
+              </div>
+            </div>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 text-zinc-400 font-mono text-xs">Primary</span>
+          </div>
+
+          <p class="text-sm text-zinc-400 leading-relaxed">
+            Head of IT Operations at SGH Asia. Managing high-stakes corporate infrastructure, multi-site network topologies, and strict compliance boundaries.
+          </p>
+
+          <ul class="space-y-2 text-xs font-mono text-zinc-300">
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400">✓</span>
+              <span><strong>Virtualization:</strong> Bare-Metal Proxmox VE, LXC, KVM, Rootless Podman</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400">✓</span>
+              <span><strong>Routing &amp; Edge:</strong> MikroTik RouterOS (BGP, WireGuard, DHCP Authority)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400">✓</span>
+              <span><strong>Security &amp; DLP:</strong> ITIL Standards, ISO 27001 DLP, CrowdSec Ingress</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400">✓</span>
+              <span><strong>Automation:</strong> Hardened Ansible Playbooks, ZFS Snapshot Rotations</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Track 2: AI Systems -->
+        <div class="p-6 rounded-xl bg-brand-surface border border-brand-border hover:border-brand-borderHover transition-all space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <div class="p-2 rounded-lg bg-zinc-800 text-sky-400">
+                <i data-lucide="boxes" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h3 class="font-semibold text-zinc-100">AI Systems &amp; Agent Harnesses</h3>
+                <p class="text-xs text-zinc-500 font-mono">Governed Autonomous Runtimes</p>
+              </div>
+            </div>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 text-sky-400 font-mono text-xs">Frontier</span>
+          </div>
+
+          <p class="text-sm text-zinc-400 leading-relaxed">
+            Treating LLMs as untrusted, high-velocity compute workers governed by deterministic code gates, capability dropping, and verifiable write receipts.
+          </p>
+
+          <ul class="space-y-2 text-xs font-mono text-zinc-300">
+            <li class="flex items-start gap-2">
+              <span class="text-sky-400">✓</span>
+              <span><strong>Cognitive Harness:</strong> tamld-llm-wiki (3-layer SSoT, ADLC FSM, wiki.py engine)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-sky-400">✓</span>
+              <span><strong>Zero-Trust Sandboxing:</strong> g8s process execution &amp; subagent capability dropping</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-sky-400">✓</span>
+              <span><strong>High-Speed Telemetry:</strong> VictoriaLogs LogSQL &amp; Uptime Kuma dual-plane probing</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-sky-400">✓</span>
+              <span><strong>Cost Engineering:</strong> 9Router sticky pool routing &amp; context compaction</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FLAGSHIP ENGINEERED SYSTEMS (BENTO GRID) -->
+    <section id="systems" class="space-y-6">
+      <div class="space-y-2">
+        <div class="inline-flex items-center gap-2 text-xs font-mono text-sky-400 uppercase tracking-wider">
+          <i data-lucide="git-pull-request" class="w-4 h-4"></i>
+          Verified Implementations
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-zinc-100 tracking-tight">Flagship Engineered Systems</h2>
+        <p class="text-zinc-400 text-sm max-w-3xl">
+          Real, verifiable codebases with physical receipts, zero ghost capacity, and reproducible architecture.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-4">
+        
+        <!-- Project 1: g8s -->
+        <div class="p-6 rounded-xl bg-brand-surface border border-brand-border hover:border-brand-borderHover transition-all flex flex-col justify-between group">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-sky-950/60 text-sky-400 border border-sky-800/40">Pure Go • Zero-Trust</span>
+              <a href="https://github.com/tamld/g8s" target="_blank" rel="noopener noreferrer" class="text-zinc-400 group-hover:text-zinc-100 transition-colors">
+                <i data-lucide="external-link" class="w-4 h-4"></i>
+              </a>
+            </div>
+            <h3 class="text-lg font-bold text-zinc-100 group-hover:text-sky-400 transition-colors">
+              g8s (The Gatekeepers)
+            </h3>
+            <p class="text-xs text-zinc-400 leading-relaxed">
+              Lightweight process execution and capability harness for AI Agent CLI Workers. "k8s orchestrates your compute containers; g8s orchestrates your AI subagents."
+            </p>
+            <div class="text-[11px] font-mono text-zinc-500 space-y-1">
+              <div>• Time-limited, path-scoped write receipts (Schema v3)</div>
+              <div>• Automated supervisor fix loops &amp; execution verification</div>
+            </div>
+          </div>
+          <div class="pt-4 mt-4 border-t border-zinc-800/80 flex items-center justify-between text-xs font-mono">
+            <span class="text-zinc-500">Go 1.22+ • MIT License</span>
+            <a href="https://github.com/tamld/g8s" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:underline">github.com/tamld/g8s ↗</a>
+          </div>
+        </div>
+
+        <!-- Project 2: IaC Platform -->
+        <div class="p-6 rounded-xl bg-brand-surface border border-brand-border hover:border-brand-borderHover transition-all flex flex-col justify-between group">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-emerald-950/60 text-emerald-400 border border-emerald-800/40">Bare-Metal SRE • IaC</span>
+              <a href="https://github.com/tamld/IaC" target="_blank" rel="noopener noreferrer" class="text-zinc-400 group-hover:text-zinc-100 transition-colors">
+                <i data-lucide="external-link" class="w-4 h-4"></i>
+              </a>
+            </div>
+            <h3 class="text-lg font-bold text-zinc-100 group-hover:text-emerald-400 transition-colors">
+              AI-Assisted Infrastructure Platform (IaC)
+            </h3>
+            <p class="text-xs text-zinc-400 leading-relaxed">
+              Production-inspired reference architecture and SRE automation for bare-metal homelabs. Proxmox VE, Rootless Podman, Tailscale Mesh, and VictoriaLogs.
+            </p>
+            <div class="text-[11px] font-mono text-zinc-500 space-y-1">
+              <div>• Dual-plane observability (WAN vs LAN decoupled triage)</div>
+              <div>• CrowdSec automated intrusion defense &amp; Traefik v3 ingress</div>
+            </div>
+          </div>
+          <div class="pt-4 mt-4 border-t border-zinc-800/80 flex items-center justify-between text-xs font-mono">
+            <span class="text-zinc-500">Proxmox • Ansible • Traefik</span>
+            <a href="https://github.com/tamld/IaC" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">github.com/tamld/IaC ↗</a>
+          </div>
+        </div>
+
+        <!-- Project 3: tamld-llm-wiki -->
+        <div class="p-6 rounded-xl bg-brand-surface border border-brand-border hover:border-brand-borderHover transition-all flex flex-col justify-between group">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-purple-950/60 text-purple-400 border border-purple-800/40">Cognitive Orchestrator</span>
+              <a href="https://tamld.github.io/llms-full.txt#second-brain" target="_blank" rel="noopener noreferrer" class="text-zinc-400 group-hover:text-zinc-100 transition-colors">
+                <i data-lucide="external-link" class="w-4 h-4"></i>
+              </a>
+            </div>
+            <h3 class="text-lg font-bold text-zinc-100 group-hover:text-purple-400 transition-colors">
+              tamld-llm-wiki (Governed Second Brain)
+            </h3>
+            <p class="text-xs text-zinc-400 leading-relaxed">
+              A deterministic Second Brain for autonomous AI agents. Features 3-layer indexing, JIT context prefetch, ADLC finite state machines, and Gate D deep-why audits.
+            </p>
+            <div class="text-[11px] font-mono text-zinc-500 space-y-1">
+              <div>• Deterministic Python engine (wiki.py) enforces note physics</div>
+              <div>• Epistemic ladder (Hypothesis ➔ Physical Proven evidence)</div>
+            </div>
+          </div>
+          <div class="pt-4 mt-4 border-t border-zinc-800/80 flex items-center justify-between text-xs font-mono">
+            <span class="text-zinc-500">Python 3.11 • Git Hooks</span>
+            <a href="https://tamld.github.io/llms-full.txt#second-brain" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:underline">tamld.github.io/llms-full.txt#second-brain ↗</a>
+          </div>
+        </div>
+
+        <!-- Project 4: defense-in-depth -->
+        <div class="p-6 rounded-xl bg-brand-surface border border-brand-border hover:border-brand-borderHover transition-all flex flex-col justify-between group">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-rose-950/60 text-rose-400 border border-rose-800/40">HITL Security</span>
+              <a href="https://github.com/tamld/defense-in-depth" target="_blank" rel="noopener noreferrer" class="text-zinc-400 group-hover:text-zinc-100 transition-colors">
+                <i data-lucide="external-link" class="w-4 h-4"></i>
+              </a>
+            </div>
+            <h3 class="text-lg font-bold text-zinc-100 group-hover:text-rose-400 transition-colors">
+              defense-in-depth (HITL Cards)
+            </h3>
+            <p class="text-xs text-zinc-400 leading-relaxed">
+              Human-in-the-loop (HITL) approval cards delivered via Telegram with HMAC-SHA256 signature verification for critical autonomous SRE actions.
+            </p>
+            <div class="text-[11px] font-mono text-zinc-500 space-y-1">
+              <div>• Prevents unauthorized agent mutations on live infrastructure</div>
+              <div>• Cryptographic one-click approval / reject callbacks</div>
+            </div>
+          </div>
+          <div class="pt-4 mt-4 border-t border-zinc-800/80 flex items-center justify-between text-xs font-mono">
+            <span class="text-zinc-500">Security • Telegram HITL</span>
+            <a href="https://github.com/tamld/defense-in-depth" target="_blank" rel="noopener noreferrer" class="text-rose-400 hover:underline">github.com/tamld/defense-in-depth ↗</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ARCHITECTURAL INVARIANTS: THE ANTI-SLOP MANIFESTO -->
+    <section id="invariants" class="space-y-6">
+      <div class="space-y-2">
+        <div class="inline-flex items-center gap-2 text-xs font-mono text-sky-400 uppercase tracking-wider">
+          <i data-lucide="shield-check" class="w-4 h-4"></i>
+          Engineering Principles
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-zinc-100 tracking-tight">Architectural Invariants</h2>
+        <p class="text-zinc-400 text-sm max-w-3xl">
+          Non-negotiable laws that govern every system I build, whether physical hardware or multi-agent autonomous loops.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <div class="p-5 rounded-xl bg-brand-surface border border-brand-border space-y-2.5">
+          <div class="text-zinc-100 font-mono text-xs font-semibold flex items-center gap-2">
+            <span class="text-sky-400">01.</span> Boring Truth &gt; Fiction
+          </div>
+          <p class="text-xs text-zinc-400 leading-relaxed">
+            If an architecture or component is verified and optimal, affirm it plainly. Never invent fake risks or linear noise traps just to appear critical.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-xl bg-brand-surface border border-brand-border space-y-2.5">
+          <div class="text-zinc-100 font-mono text-xs font-semibold flex items-center gap-2">
+            <span class="text-sky-400">02.</span> Code Over Prompt
+          </div>
+          <p class="text-xs text-zinc-400 leading-relaxed">
+            Critical perimeters, DLP rules, and compliance are enforced by deterministic code gates (Python/Go/Bash), never by hopeful prompting.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-xl bg-brand-surface border border-brand-border space-y-2.5">
+          <div class="text-zinc-100 font-mono text-xs font-semibold flex items-center gap-2">
+            <span class="text-sky-400">03.</span> Hardware Reality
+          </div>
+          <p class="text-xs text-zinc-400 leading-relaxed">
+            Compute capacity is bound by physical silicon, RAM envelopes, and thermal limits. Never architect workloads based on unverified ghost capacity.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-xl bg-brand-surface border border-brand-border space-y-2.5">
+          <div class="text-zinc-100 font-mono text-xs font-semibold flex items-center gap-2">
+            <span class="text-sky-400">04.</span> Dual-Plane Telemetry
+          </div>
+          <p class="text-xs text-zinc-400 leading-relaxed">
+            Decouple internal compute health ([LAN]) from public edge reachability ([WAN]). Correlation immediately isolates ingress and routing failures.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- AGENTIC / LLMS.TXT STANDARD CALLOUT -->
+    <section class="p-6 sm:p-8 rounded-2xl bg-zinc-900/60 border border-brand-border space-y-5">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="space-y-1">
+          <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-sky-950/60 text-sky-400 border border-sky-800/40 text-xs font-mono">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+            Machine-Readable Discovery Standard
+          </div>
+          <h3 class="text-xl font-bold text-zinc-100">LLM-Agent Native Interface</h3>
+          <p class="text-xs sm:text-sm text-zinc-400">
+            Compliant with <a href="https://llmstxt.org/" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:underline">llmstxt.org</a> standard. AI Agents can ingest this entire profile cleanly via a single HTTP request without DOM bloat.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2 font-mono text-xs">
+          <a href="/llms.txt" class="px-3.5 py-2 rounded-md bg-zinc-800 hover:bg-zinc-700 text-zinc-200 transition-colors flex items-center gap-1.5">
+            <i data-lucide="file-text" class="w-4 h-4 text-sky-400"></i>
+            /llms.txt
+          </a>
+          <a href="/llms-full.txt" class="px-3.5 py-2 rounded-md bg-zinc-800 hover:bg-zinc-700 text-zinc-200 transition-colors flex items-center gap-1.5">
+            <i data-lucide="file-code" class="w-4 h-4 text-emerald-400"></i>
+            /llms-full.txt
+          </a>
+        </div>
+      </div>
+
+      <!-- Copyable curl snippet -->
+      <div class="p-3 sm:p-4 rounded-lg bg-black/60 border border-zinc-800 font-mono text-xs flex items-center justify-between gap-3 overflow-x-auto">
+        <div class="flex items-center gap-2 text-zinc-300">
+          <span class="text-sky-400 select-none">$</span>
+          <span id="curl-cmd">curl -sL https://tamld.github.io/llms.txt</span>
+        </div>
+        <button onclick="copyCurl()" id="copy-btn" class="px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors flex items-center gap-1.5 text-[11px] shrink-0">
+          <i data-lucide="copy" class="w-3 h-3"></i>
+          <span>Copy</span>
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MINIMAL FOOTER -->
+  <footer class="border-t border-brand-border py-10 px-4 lg:px-8 text-xs font-mono text-zinc-500">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+      <div>
+        © 2026 Le Duc Tam (tamld). Zero-build static site. Zero trackers.
+      </div>
+      <div class="flex items-center gap-4 text-zinc-400">
+        <a href="https://github.com/tamld" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-100 transition-colors">GitHub</a>
+        <a href="https://linkedin.com/in/tamld" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-100 transition-colors">LinkedIn</a>
+        <a href="mailto:ductam1828@gmail.com" class="hover:text-zinc-100 transition-colors">Email</a>
+        <a href="/llms.txt" class="hover:text-sky-400 transition-colors">/llms.txt</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT: Vanilla JS Interactive Terminal & Utilities -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Copy curl command utility
+    function copyCurl() {
+      const text = document.getElementById('curl-cmd').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copy-btn');
+        btn.innerHTML = `<i data-lucide="check" class="w-3 h-3 text-emerald-400"></i><span class="text-emerald-400">Copied!</span>`;
+        lucide.createIcons();
+        setTimeout(() => {
+          btn.innerHTML = `<i data-lucide="copy" class="w-3 h-3"></i><span>Copy</span>`;
+          lucide.createIcons();
+        }, 2000);
+      });
+    }
+
+    // Terminal Emulator
+    const terminalOutput = document.getElementById('terminal-output');
+    const terminalInput = document.getElementById('terminal-input');
+    const terminalRunBtn = document.getElementById('terminal-run-btn');
+
+    const COMMANDS = {
+      'help': () => `
+<div class="space-y-1 text-zinc-300">
+  <div><span class="text-sky-400">tamld --whoami</span>     : Display professional identity & role</div>
+  <div><span class="text-sky-400">tamld --skills</span>     : Show dual-track technical competencies</div>
+  <div><span class="text-sky-400">tamld --homelab</span>    : View bare-metal homelab architecture & specs</div>
+  <div><span class="text-sky-400">tamld --projects</span>   : List flagship open-source repositories</div>
+  <div><span class="text-sky-400">tamld --contact</span>    : Print contact channels & verified profiles</div>
+  <div><span class="text-sky-400">curl /llms.txt</span>    : Simulate machine-readable agentic payload</div>
+  <div><span class="text-sky-400">clear</span>             : Reset terminal screen</div>
+</div>`,
+
+      'tamld --whoami': () => `
+<div class="pl-4 border-l border-zinc-800 space-y-1 text-zinc-300">
+  <div><strong class="text-zinc-100">Le Duc Tam (tamld)</strong> — Systems Engineer & AI Architect</div>
+  <div>Head of IT Operations @ SGH Asia (11+ years bare-metal & enterprise operations).</div>
+  <div>Engineering governed agent harnesses with deterministic code gates and Zero-Trust DLP.</div>
+  <div>Location: Ho Chi Minh City, Vietnam.</div>
+</div>`,
+
+      'tamld --skills': () => `
+<div class="pl-4 border-l border-zinc-800 space-y-2 text-zinc-300">
+  <div><span class="text-amber-400 font-semibold">[Track A: Enterprise IT Ops]</span></div>
+  <div class="text-zinc-400">• Proxmox VE, KVM, LXC unprivileged containers, Rootless Podman, Docker</div>
+  <div class="text-zinc-400">• MikroTik RouterOS (BGP, OSPF, WireGuard, DHCP Authority, VLAN segmentation)</div>
+  <div class="text-zinc-400">• Ansible IaC, ZFS storage pipelines, ITIL, ISO 27001 DLP compliance</div>
+  <div class="mt-2"><span class="text-sky-400 font-semibold">[Track B: AI Systems & Harnesses]</span></div>
+  <div class="text-zinc-400">• Governed Second Brain (tamld-llm-wiki), ADLC FSM, wiki.py engine</div>
+  <div class="text-zinc-400">• g8s process execution, capability dropping, path-scoped write receipts</div>
+  <div class="text-zinc-400">• VictoriaLogs LogSQL triage, VictoriaMetrics, CrowdSec defense-in-depth</div>
+  <div class="text-zinc-400">• Multi-tier LLM sticky routing (9Router), subagent model tiering</div>
+</div>`,
+
+      'tamld --homelab': () => `
+<div class="pl-4 border-l border-zinc-800 space-y-1 text-zinc-300">
+  <div class="text-emerald-400 font-semibold">[Bare-Metal Homelab Fleet Specifications]</div>
+  <div>• Hypervisor: Proxmox VE (Intel Core i5-8500, 16GB RAM hardware envelope)</div>
+  <div>• Gateway: MikroTik RouterOS 10.0.0.1 (Single DHCP Static Lease Authority)</div>
+  <div>• Ingress: Traefik v3 + CrowdSec distributed bouncer (Zero-WAN admin exposure)</div>
+  <div>• Mesh: Tailscale Zero-Trust private mesh (Overlay Mesh)</div>
+  <div>• Observability: VictoriaLogs (LogSQL), VictoriaMetrics, Uptime Kuma dual-plane</div>
+  <div>• Autonomous SRE: CTI ingestion, SBOM monitoring, Telegram HMAC-SHA256 HITL</div>
+</div>`,
+
+      'tamld --projects': () => `
+<div class="pl-4 border-l border-zinc-800 space-y-1.5 text-zinc-300">
+  <div>1. <strong class="text-sky-400">g8s</strong>: Zero-Trust subagent process execution & write receipts (<a href="https://github.com/tamld/g8s" target="_blank" class="text-sky-300 underline">github.com/tamld/g8s</a>)</div>
+  <div>2. <strong class="text-emerald-400">IaC</strong>: Production-grade bare-metal homelab SRE & automation (<a href="https://github.com/tamld/IaC" target="_blank" class="text-emerald-300 underline">github.com/tamld/IaC</a>)</div>
+  <div>3. <strong class="text-purple-400">tamld-llm-wiki</strong>: Deterministic governed Second Brain with ADLC gates (<a href="https://tamld.github.io/llms-full.txt#second-brain" target="_blank" class="text-purple-300 underline">tamld.github.io/llms-full.txt#second-brain</a>)</div>
+  <div>4. <strong class="text-rose-400">defense-in-depth</strong>: Human-in-the-loop Telegram HMAC approval cards (<a href="https://github.com/tamld/defense-in-depth" target="_blank" class="text-rose-300 underline">github.com/tamld/defense-in-depth</a>)</div>
+</div>`,
+
+      'tamld --contact': () => `
+<div class="pl-4 border-l border-zinc-800 space-y-1 text-zinc-300">
+  <div>• Email: <a href="mailto:ductam1828@gmail.com" class="text-sky-400 underline">ductam1828@gmail.com</a></div>
+  <div>• LinkedIn: <a href="https://linkedin.com/in/tamld" target="_blank" class="text-sky-400 underline">linkedin.com/in/tamld</a></div>
+  <div>• GitHub: <a href="https://github.com/tamld" target="_blank" class="text-sky-400 underline">github.com/tamld</a></div>
+  <div>• Machine Endpoint: <a href="/llms.txt" class="text-sky-400 underline">https://tamld.github.io/llms.txt</a></div>
+</div>`,
+
+      'curl /llms.txt': () => `
+<div class="p-2 rounded bg-black/60 border border-zinc-800 text-zinc-400 space-y-1">
+  <div class="text-emerald-400">HTTP/2 200 OK — content-type: text/markdown</div>
+  <div class="text-zinc-300"># Tam Le Duc (tamld) — AI Systems Architect & Enterprise IT Operations Leader</div>
+  <div>&gt; Le Duc Tam bridges 11+ years of mission-critical enterprise IT operations with autonomous AI agent systems.</div>
+  <div class="text-sky-400">## Core Identity & Background</div>
+  <div>- [Professional Overview](https://tamld.github.io/llms-full.txt#identity)</div>
+  <div class="text-zinc-500 font-sans italic pt-1">Tip: Click '/llms.txt' in the top header to view the full live document.</div>
+</div>`,
+
+      'clear': () => {
+        terminalOutput.innerHTML = '';
+        return null;
+      }
+    };
+
+    function runCommand(cmdText) {
+      const clean = cmdText.trim();
+      if (!clean) return;
+
+      // Print command prompt
+      const cmdLine = document.createElement('div');
+      cmdLine.innerHTML = `<span class="text-emerald-400">guest@tamld:~$</span> <span class="text-zinc-100">${escapeHtml(clean)}</span>`;
+      terminalOutput.appendChild(cmdLine);
+
+      // Handle command execution
+      const fn = COMMANDS[clean.toLowerCase()];
+      if (fn) {
+        const res = fn();
+        if (res !== null) {
+          const resBox = document.createElement('div');
+          resBox.innerHTML = res;
+          terminalOutput.appendChild(resBox);
+        }
+      } else {
+        const errBox = document.createElement('div');
+        errBox.className = 'text-rose-400';
+        errBox.innerHTML = `zsh: command not found: ${escapeHtml(clean)}. Type <span class="text-sky-400">help</span> to view available commands.`;
+        terminalOutput.appendChild(errBox);
+      }
+
+      // Scroll to bottom
+      terminalOutput.scrollTop = terminalOutput.scrollHeight;
+    }
+
+    function escapeHtml(text) {
+      return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    terminalInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const val = terminalInput.value;
+        terminalInput.value = '';
+        runCommand(val);
+      }
+    });
+
+    terminalRunBtn.addEventListener('click', () => {
+      const val = terminalInput.value;
+      terminalInput.value = '';
+      runCommand(val);
+    });
+  </script>
+</body>
+</html>

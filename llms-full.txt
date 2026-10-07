@@ -1,0 +1,113 @@
+# Le Duc Tam (tamld) — Full Technical Dossier & Systems Profile
+Source: https://tamld.github.io/llms-full.txt
+Standard: https://llmstxt.org/
+
+---
+
+## 1. Executive Summary & Identity Core
+- Full Name: Le Duc Tam (tamld)
+- Location: Ho Chi Minh City, Vietnam
+- Primary Domain: Dual-Track Systems Engineer — Enterprise IT Operations (11+ Years) & AI Systems Architect
+- Email: ductam1828@gmail.com
+- GitHub: https://github.com/tamld
+- LinkedIn: https://linkedin.com/in/tamld
+- YouTube: https://www.youtube.com/@uctamle8644
+
+With over 11 years in enterprise IT operations, bare-metal virtualization, and network infrastructure, TamLD approaches Artificial Intelligence from a first-principles systems engineering perspective. Rather than treating AI models as magical conversational agents, he models them as untrusted, high-velocity compute runtimes that require strict capability sandboxing, deterministic code gates, cryptographic write receipts, and verifiable observability.
+
+---
+
+## 2. Career Philosophy & Mindset Signals
+
+### 2.1 Zero Trust & Default-Deny Governance
+- Applied uniformly across physical networks, container clusters, and autonomous agent loops.
+- No implicit trust between subagents or external tools. Every action requires time-limited, path-scoped authority receipts.
+
+### 2.2 First-Principles Systems Architecture
+- Rejects band-aid fixes and superficial tool-churning.
+- Every architectural decision must answer: "What is the physical root cause?", "Where does the state live?", "What are the physical hardware bounds?"
+
+### 2.3 Code Over Prompt (Deterministic Physics)
+- Critical boundaries, DLP policies, and compliance contracts are enforced by deterministic code (Python, Go, Bash, Git Hooks), never by probabilistic system prompts.
+- Zero vendor lock-in; platform-agnostic harness design.
+
+### 2.4 Epistemic Integrity
+- Strict epistemic separation between hypothesis (`[HYPO]`) and physically proven evidence (`[PROVEN]`).
+- Every technical claim must cite reproducible physical evidence (command, exit code, log line, or file path).
+
+### 2.5 Boring Truth Over Dramatic Fiction
+- If an architecture or component is already verified, minimal, and working, affirm it plainly.
+- Reject the temptation to manufacture artificial complexity or fake metrics for the sake of marketing theater.
+
+---
+
+## 3. Dual-Track Competency Matrix
+
+### Track A: Enterprise IT Operations & Infrastructure (11+ Years)
+- Leadership: Head of IT Operations at SGH Asia. Managing cross-functional infrastructure teams, incident war rooms, and enterprise SLA delivery.
+- Virtualization & Compute: Bare-metal Proxmox VE, LXC unprivileged containers, KVM, Rootless Podman, Docker Compose.
+- Networking & Perimeter: MikroTik RouterOS (BGP, OSPF, WireGuard, VLAN isolation, DHCP Static Lease Authority), Traefik v3 Reverse Proxy, Cloudflare Zero Trust.
+- Security & Compliance: ITIL standards, ISO 27001 Data Leakage Prevention (DLP), CrowdSec distributed intrusion prevention, Authelia OIDC/SSO, Vaultwarden, Tailscale Zero-WAN mesh.
+- Automation & IaC: Ansible automation playbooks, hardened Bash tooling, ZFS storage management, immutable snapshot rotations.
+
+### Track B: AI Systems Engineering & Agentic Harnesses
+- Governed Cognitive Architectures: tamld-llm-wiki (Deterministic 3-layer Second Brain with ADLC finite state machines, JIT context prefetching, and Gate D deep-why audits).
+- Capability Sandboxing: g8s (The Gatekeepers) — Go-based process execution runtime providing subagent capability dropping, path-scoped write receipts, and automated supervisor fix loops.
+- Telemetry & Observability: VictoriaLogs LogSQL high-speed log aggregation, VictoriaMetrics time-series monitoring, Uptime Kuma dual-plane synthetic probing.
+- AI Routing & Cost Engineering: Multi-tier LLM gateway (9Router, LiteLLM), context window compaction, token budget enforcement, subagent model tiered allocation (flash/flash_lite vs pro).
+
+---
+
+## 4. Flagship Engineered Systems
+
+### 4.1 g8s (The Gatekeepers)
+- Repository: https://github.com/tamld/g8s
+- Runtime: Pure Go (1.22+)
+- Architecture:
+  * Two-Tier Agent Harness: Enables frontier model orchestrators (Claude 3.7 / Opus / GPT-4o) to safely delegate high-frequency mechanical tasks to lightweight worker CLI runtimes (Antigravity CLI, Claude Code CLI, Gemini CLI).
+  * Cryptographic Write Receipts: Grants time-limited, path-scoped write authority to prevent unauthorized mutations and codebase drift.
+  * Supervisor Fix Loop: Automated execution verification and self-correcting agent loops.
+
+### 4.2 AI-Assisted Infrastructure Operations Platform (IaC)
+- Repository: https://github.com/tamld/IaC
+- Domain: Production Bare-Metal Homelab & Enterprise SRE Automation
+- Key Subsystems:
+  * 3-Tier Balanced Architecture: Perimeter Ingress & Identity (Traefik v3, CrowdSec, Tailscale Mesh, Authelia/Pocket-ID IAM) -> AI Gateway & Operations Plane (LiteLLM, SRE Butler Agent) -> Observability Core (VictoriaLogs, VictoriaMetrics).
+  * Dual-Plane Observability Mandate: Internal compute health ([LAN]) and public edge reachability ([WAN]) decoupled to instantly isolate network/routing failures.
+  * Single Authority Network Identity: MikroTik RouterOS DHCP server is the authoritative single source of truth for MAC-to-IP static lease bindings.
+
+### 4.3 tamld-llm-wiki (Governed AI Second Brain)
+- Repository: https://tamld.github.io/llms-full.txt#second-brain
+- Core Engine: wiki.py (Deterministic Python physics engine)
+- Features:
+  * 3-Layer Map Protocol: Global Scope (README) -> Architectural Scope (DESIGN) -> Behavioral Scope (AGENTS).
+  * ADLC Finite State Machine: Pre-commit and commit-time hard gates preventing language leaks, unpinned cross-repo citations, and untested plan transitions.
+  * Epistemic Ladder: Progressive claim verification from speculation to validated via concrete physical proof.
+
+### 4.4 defense-in-depth (HITL Autonomous Incident Response)
+- Repository: https://github.com/tamld/defense-in-depth
+- Security Model: Human-In-The-Loop (HITL) approval cards delivered via Telegram with HMAC-SHA256 signature verification for critical container restarts or firewall mutations.
+
+---
+
+## 5. Architectural Invariants
+
+1. Hardware Reality Invariant (Physical Silicon Bounds):
+   All architecture designs are bounded by physical compute envelopes. Proxmox host memory utilization is strictly budgeted (<85% threshold) with zero tolerance for unbudgeted ghost workloads.
+
+2. Anti-Circular DNS Dependency Law:
+   Core routing infrastructure (RouterOS, Hypervisor PVE Host) must never depend on containerized ad-blocking resolvers (e.g. AdGuard Home) for upstream DNS. Core substrate always points to Anycast resolvers (1.1.1.1, 8.8.8.8) to eliminate deadlocks.
+
+3. Zero-WAN Exposure Law for Core Management:
+   Hypervisor management interfaces, RouterOS Winbox/SSH, and internal databases are never exposed to public WAN. Ingress is permitted strictly through Traefik proxied via Cloudflare IP ranges or Tailscale mesh.
+
+4. Fast Batch Telemetry Law:
+   Incident triage scripts must avoid sequential SSH loops. Fleet triage uses sub-2-second batch queries and LogSQL filtering to resolve root causes under pressure.
+
+---
+
+## 6. Contact & Collaboration
+- Professional Networking: https://linkedin.com/in/tamld
+- Code Contributions: https://github.com/tamld
+- Inquiries: ductam1828@gmail.com
+- Location: Ho Chi Minh City, Vietnam (UTC+7)
