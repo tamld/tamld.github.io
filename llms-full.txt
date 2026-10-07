@@ -44,7 +44,7 @@ With over 11 years in enterprise IT operations, bare-metal virtualization, and n
 ## 3. Dual-Track Competency Matrix
 
 ### Track A: Enterprise IT Operations & Infrastructure (11+ Years)
-- Leadership: Head of IT Operations at SGH Asia. Managing cross-functional infrastructure teams, incident war rooms, and enterprise SLA delivery.
+- Enterprise Heritage: 11+ years administering and hardening enterprise IT operations, virtualization, multi-site network topologies, and disaster recovery SLA compliance (ZEISS Group, Artstuff, Thien Nam Hoa).
 - Virtualization & Compute: Bare-metal Proxmox VE, LXC unprivileged containers, KVM, Rootless Podman, Docker Compose.
 - Networking & Perimeter: MikroTik RouterOS (BGP, OSPF, WireGuard, VLAN isolation, DHCP Static Lease Authority), Traefik v3 Reverse Proxy, Cloudflare Zero Trust.
 - Security & Compliance: ITIL standards, ISO 27001 Data Leakage Prevention (DLP), CrowdSec distributed intrusion prevention, Authelia OIDC/SSO, Vaultwarden, Tailscale Zero-WAN mesh.

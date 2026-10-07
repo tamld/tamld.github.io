@@ -4,7 +4,7 @@
 
 ## 🚀 Features
 - **Anti-AI-Slop Engineering**: High-contrast, tactile dark-tech aesthetic (Inter/Geist + JetBrains Mono) without generic purple gradients or marketing fluff.
-- **Dual-Track Competency**: 11+ years of enterprise IT operations (SGH Asia) paired with AI Systems Engineering & Agentic Harnesses.
+- **Dual-Track Competency**: 11+ years of bare-metal enterprise IT operations & infrastructure paired with AI Systems Engineering & Agentic Harnesses.
 - **Interactive Terminal Widget**: Client-side Vanilla JS terminal simulator (`tamld --whoami`, `tamld --skills`, `tamld --homelab`, `tamld --projects`).
 - **Machine-Readable Standard (`llms.txt`)**: Fully compliant with [llmstxt.org](https://llmstxt.org/) specification for zero-overhead LLM / AI Agent context ingestion.
 - **Zero-Build & Zero-Dependency**: Single-file HTML5 + Tailwind CSS CDN, sub-100ms FCP, zero npm dependencies, hosted on GitHub Pages CDN.
