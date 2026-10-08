@@ -6,7 +6,7 @@
     "lan": "UP",
     "wan": "UP",
     "probe_latency_ms": 142,
-    "uptime_kuma": "DUAL-PROBE:3001",
+    "uptime_kuma": "DUAL-PROBE (Proxmox VE)",
     "edge_reachability": "https://*.edge.internal"
   },
   "substrate": {
@@ -21,13 +21,13 @@
   },
   "networking": {
     "gateway": "MikroTik hEX S / RouterOS v7",
-    "dhcp_lease_authority": "RouterOS 10.0.0.1 (Single Source of Truth)",
+    "dhcp_lease_authority": "MikroTik RouterOS (Single Source of Truth DHCP)",
     "ingress": "Traefik v3 (Ports 80/443 proxied via Cloudflare IP ranges)",
     "zero_wan_management": true,
-    "remote_mesh": "Tailscale Overlay (Overlay Mesh)"
+    "remote_mesh": "Tailscale Overlay Mesh"
   },
   "observability": {
-    "engine": "VictoriaLogs (LOG-SINK:9428)",
+    "engine": "VictoriaLogs LogSQL",
     "query_language": "LogSQL",
     "triage_latency": "<2s fast batch telemetry",
     "audit_compliance": "100% Deterministic ADLC / Zero-Leakage DLP"

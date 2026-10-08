@@ -13,7 +13,7 @@ Tam approaches AI not as prompt-driven magic, but as an untrusted, high-velocity
 ## Flagship Engineered Projects
 - [g8s (The Gatekeepers)](https://github.com/tamld/g8s): Lightweight zero-trust process execution and capability harness in Go for AI agent CLI workers. Enforces time-limited write receipts and subagent sandboxing.
 - [AI-Assisted Infrastructure Operations Platform (IaC)](https://github.com/tamld/IaC): Production-grade bare-metal homelab SRE platform running Traefik v3, Rootless Podman, CrowdSec, Tailscale Zero-WAN mesh, and VictoriaLogs.
-- [tamld-llm-wiki](https://tamld.github.io/llms-full.txt#second-brain): Governed AI Second Brain featuring a deterministic physics engine (wiki.py), ADLC finite state machines, and Gate D deep-why verification.
+- [tamld-llm-wiki (Architecture Case Study)](https://tamld.github.io/llms-full.txt#second-brain): Governed AI Second Brain featuring a deterministic physics engine (wiki.py), ADLC finite state machines, and Gate D deep-why verification.
 - [defense-in-depth](https://github.com/tamld/defense-in-depth): Human-in-the-loop (HITL) HMAC-SHA256 Telegram approval cards for autonomous incident remediation and SRE operations.
 - [TuneFlow](https://github.com/tamld/tuneflow): Fast, cross-platform audio and streaming utility built with modern systems programming.
 - [GitHub Profile Dossier](https://github.com/tamld/tamld): Central hub documenting architecture decisions, public runtimes, and engineering principles.

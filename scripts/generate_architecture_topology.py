@@ -1,15 +1,19 @@
 #!/usr/bin/env python3
 """
-Reproducible Vector Generator for TamLD Homelab Dual-Plane Topology.
+Reproducible Sanitized Vector Generator for TamLD Homelab Dual-Plane Topology.
 Compiles physical infrastructure invariants into a crisp, zero-gradient,
 responsive dark-industrial SVG asset.
 
-SSoT Reference:
-  - 1-Knowledge/K-Proxmox-Home-Server-Lab.md
-  - .agents/plugins/homelab-sre/rules/AGENTS.md
+DLP & OpSec Invariant:
+  - 100% Sanitized: Zero RFC 1918 production IPs (no 10.0.0.x).
+  - Zero private domains (no real domains, uses RFC 2606 *.edge.internal).
+  - Zero container internal IDs (uses semantic roles: EDGE-PROXY, IAM-AUTH, etc.).
+  - Preserves architectural truth: Dual-Plane Observability, Single DHCP Authority,
+    Cloudflare Edge WAF, Traefik ForwardAuth, Zero-WAN Management.
 """
 
 from pathlib import Path
+import re
 
 OUTPUT_PATH = Path(__file__).resolve().parent.parent / "assets" / "diagrams" / "arch-dualplane-topology.svg"
 
@@ -34,7 +38,6 @@ SVG_CONTENT = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 620" 
       .flow-lan { stroke: #10b981; stroke-width: 1.5; fill: none; stroke-dasharray: 3 3; }
       .flow-auth { stroke: #f59e0b; stroke-width: 1.5; fill: none; stroke-dasharray: 4 3; }
       .flow-telemetry { stroke: #818cf8; stroke-width: 1.2; fill: none; stroke-dasharray: 2 3; }
-      .flow-marker { fill: #38bdf8; }
     </style>
     <marker id="arrow-wan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 1 L 8 5 L 0 9 z" fill="#38bdf8"/>
@@ -57,21 +60,21 @@ SVG_CONTENT = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 620" 
   <!-- TOP HEADER / METRIC BAR -->
   <rect x="16" y="16" width="1028" height="48" class="bg-panel" rx="4"/>
   <circle cx="36" cy="40" r="4" fill="#10b981"/>
-  <text x="48" y="44" class="text-title">HOMELAB DUAL-PLANE INGRESS &amp; OBSERVABILITY TOPOLOGY</text>
-  <text x="490" y="44" class="text-muted">Node 1: PVE i5-8500 (16GB RAM) · Single Authority RouterOS DHCP (10.0.0.1) · Zero-WAN Mgmt</text>
+  <text x="48" y="44" class="text-title">HOMELAB DUAL-PLANE INGRESS &amp; OBSERVABILITY ARCHITECTURE</text>
+  <text x="540" y="44" class="text-muted">Proxmox VE (16GB RAM) · Single Authority RouterOS DHCP · Sanitized OpSec Blueprint</text>
   
   <!-- LEGEND -->
-  <g transform="translate(820, 28)">
+  <g transform="translate(830, 28)">
     <line x1="0" y1="12" x2="16" y2="12" stroke="#38bdf8" stroke-width="2"/>
     <text x="22" y="15" class="text-code" font-size="8.5">WAN Ingress</text>
     <line x1="95" y1="12" x2="111" y2="12" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3 2"/>
     <text x="117" y="15" class="text-green" font-size="8.5">[LAN] Probe</text>
   </g>
 
-  <!-- ==================== ZONE 1: PUBLIC INTERNET & EDGE (x: 20 -> 180) ==================== -->
+  <!-- ==================== ZONE 1: PUBLIC INTERNET & EDGE (x: 20 -> 185) ==================== -->
   <rect x="20" y="76" width="165" height="524" class="bg-boundary" rx="4"/>
   <text x="32" y="98" class="text-header">PUBLIC EDGE</text>
-  <text x="32" y="112" class="text-muted">Untrusted Internet</text>
+  <text x="32" y="112" class="text-muted">Untrusted Ingress</text>
 
   <!-- Public Clients Node -->
   <rect x="32" y="130" width="141" height="84" class="bg-card" rx="4"/>
@@ -86,7 +89,7 @@ SVG_CONTENT = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 620" 
   <text x="44" y="308" class="text-code">WAF + GeoFilter</text>
   <text x="44" y="326" class="text-body">• Strict SSL/TLS</text>
   <text x="44" y="342" class="text-body">• DDoS Protection</text>
-  <text x="44" y="358" class="text-body">• IP Filtering</text>
+  <text x="44" y="358" class="text-body">• IP Whitelist</text>
   <text x="44" y="380" class="text-green">cloudflare_ips</text>
   <text x="44" y="400" class="text-muted">Origin Ingress Port 443</text>
 
@@ -94,75 +97,75 @@ SVG_CONTENT = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 620" 
   <rect x="32" y="480" width="141" height="96" class="bg-card" rx="4"/>
   <text x="44" y="502" class="text-header">Tailscale VPN</text>
   <text x="44" y="518" class="text-code">Overlay Mesh</text>
-  <text x="44" y="536" class="text-body">Admin Direct Mesh</text>
+  <text x="44" y="536" class="text-body">Admin Direct Auth</text>
   <text x="44" y="552" class="text-muted">Zero-WAN Exposure</text>
 
-  <!-- ==================== ZONE 2: PERIMETER GATEWAY & AUTH (x: 215 -> 465) ==================== -->
+  <!-- ==================== ZONE 2: PERIMETER GATEWAY & AUTH (x: 210 -> 460) ==================== -->
   <rect x="210" y="76" width="250" height="524" class="bg-boundary" rx="4"/>
   <text x="224" y="98" class="text-header">PERIMETER &amp; IDENTITY GATEWAY</text>
   <text x="224" y="112" class="text-muted">Ingress / Auth Boundary</text>
 
-  <!-- EDGE-PROXY Traefik Ingress Node -->
+  <!-- Traefik Reverse Proxy Node -->
   <rect x="224" y="130" width="222" height="130" class="bg-card-highlight" rx="4"/>
-  <rect x="232" y="138" width="56" height="16" fill="#0284c7" rx="2"/>
-  <text x="237" y="150" fill="#ffffff" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="bold">EDGE-PROXY</text>
-  <text x="296" y="151" class="text-header">Traefik Ingress</text>
-  <text x="236" y="176" class="text-code">10.0.0.10:80/443</text>
+  <rect x="232" y="138" width="80" height="16" fill="#0284c7" rx="2"/>
+  <text x="237" y="150" fill="#ffffff" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="bold">EDGE-PROXY</text>
+  <text x="320" y="151" class="text-header">Traefik Ingress</text>
+  <text x="236" y="176" class="text-code">Port 80/443 (Edge Only)</text>
   <text x="236" y="196" class="text-body">• Cloudflare Ingress Proxy</text>
   <text x="236" y="212" class="text-body">• Dynamic Provider (Docker/File)</text>
   <text x="236" y="228" class="text-body">• ForwardAuth Middleware</text>
   <text x="236" y="244" class="text-green">Status: LAN=UP · Edge Verified</text>
 
-  <!-- IAM-AUTH Authelia IAM Node -->
+  <!-- Authelia IAM Node -->
   <rect x="224" y="290" width="222" height="114" class="bg-card" rx="4"/>
-  <rect x="232" y="298" width="56" height="16" fill="#d97706" rx="2"/>
-  <text x="237" y="310" fill="#ffffff" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="bold">IAM-AUTH</text>
-  <text x="296" y="311" class="text-header">Authelia Gateway</text>
-  <text x="236" y="336" class="text-amber">10.0.0.20:9091</text>
+  <rect x="232" y="298" width="70" height="16" fill="#d97706" rx="2"/>
+  <text x="237" y="310" fill="#ffffff" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="bold">IAM-AUTH</text>
+  <text x="312" y="311" class="text-header">Authelia Gateway</text>
+  <text x="236" y="336" class="text-amber">ForwardAuth / OIDC Broker</text>
   <text x="236" y="354" class="text-body">• 2FA / WebAuthn / TOTP</text>
   <text x="236" y="370" class="text-body">• OIDC Client Broker</text>
   <text x="236" y="386" class="text-muted">LDAP / LLDAP Identity SSoT</text>
 
-  <!-- MikroTik RouterOS Gateway (Bottom of Zone 2) -->
+  <!-- MikroTik RouterOS Gateway -->
   <rect x="224" y="430" width="222" height="146" class="bg-card" rx="4"/>
   <rect x="232" y="438" width="80" height="16" fill="#3f3f46" rx="2"/>
-  <text x="237" y="450" fill="#ffffff" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="bold">RouterOS</text>
-  <text x="320" y="451" class="text-header">MikroTik Router</text>
-  <text x="236" y="476" class="text-green">10.0.0.1 (Single Authority)</text>
+  <text x="237" y="450" fill="#ffffff" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="bold">DHCP-SSOT</text>
+  <text x="324" y="451" class="text-header">MikroTik RouterOS</text>
+  <text x="236" y="476" class="text-green">Core Gateway (Single Authority)</text>
   <text x="236" y="496" class="text-body">• Authoritative DHCP Server</text>
   <text x="236" y="512" class="text-body">• Static MAC-to-IP Binding SSoT</text>
   <text x="236" y="528" class="text-body">• Ephemeral Flash Invariant (&lt;2MB)</text>
   <text x="236" y="546" class="text-code">Dual Backup: .rsc + .backup</text>
   <text x="236" y="562" class="text-muted">Port Forwarding: 80/443 strictly</text>
 
-  <!-- ==================== ZONE 3: COMPUTE CLUSTER & CONTAINERS (x: 485 -> 745) ==================== -->
+  <!-- ==================== ZONE 3: COMPUTE CLUSTER & CONTAINERS (x: 480 -> 740) ==================== -->
   <rect x="480" y="76" width="260" height="524" class="bg-boundary" rx="4"/>
   <text x="494" y="98" class="text-header">PROXMOX COMPUTE FABRIC</text>
-  <text x="494" y="112" class="text-muted">PVE Host: 10.0.0.2 (16GB RAM budget)</text>
+  <text x="494" y="112" class="text-muted">Hypervisor Cluster (16GB RAM budget)</text>
 
-  <!-- SECRETS Vaultwarden -->
+  <!-- Vaultwarden -->
   <rect x="494" y="130" width="232" height="66" class="bg-card" rx="4"/>
-  <text x="506" y="148" class="text-header">SECRETS · Vaultwarden</text>
-  <text x="506" y="164" class="text-code">10.0.0.30:80</text>
-  <text x="506" y="180" class="text-body">Secrets / IAM Vault · Encrypted</text>
+  <text x="506" y="148" class="text-header">Secret Vault · Vaultwarden</text>
+  <text x="506" y="164" class="text-code">IAM Secrets Manager</text>
+  <text x="506" y="180" class="text-body">End-to-End Encrypted Storage</text>
 
-  <!-- COMPUTE Coolify -->
+  <!-- Coolify -->
   <rect x="494" y="210" width="232" height="66" class="bg-card" rx="4"/>
-  <text x="506" y="228" class="text-header">COMPUTE · Coolify Runner</text>
-  <text x="506" y="244" class="text-code">10.0.0.40:8000</text>
-  <text x="506" y="260" class="text-body">App Deployment &amp; Workload Node</text>
+  <text x="506" y="228" class="text-header">App Platform · Coolify</text>
+  <text x="506" y="244" class="text-code">Application Orchestrator</text>
+  <text x="506" y="260" class="text-body">Continuous Deployment Runner</text>
 
-  <!-- DNS-RESOLV AdGuard Home -->
+  <!-- AdGuard Home -->
   <rect x="494" y="290" width="232" height="66" class="bg-card" rx="4"/>
-  <text x="506" y="308" class="text-header">DNS-RESOLV · AdGuard Home</text>
-  <text x="506" y="324" class="text-code">10.0.0.50:53</text>
-  <text x="506" y="340" class="text-body">Client/IoT DNS · Anti-Circular Law</text>
+  <text x="506" y="308" class="text-header">DNS Resolver · AdGuard Home</text>
+  <text x="506" y="324" class="text-code">Client / IoT Subnet DNS</text>
+  <text x="506" y="340" class="text-body">Anti-Circular Substrate Law</text>
 
-  <!-- SRE-OBSERVER Butler SRE Agent -->
+  <!-- Butler SRE Agent -->
   <rect x="494" y="370" width="232" height="66" class="bg-card" rx="4"/>
-  <text x="506" y="388" class="text-header">SRE-OBSERVER · Butler SRE Observer</text>
-  <text x="506" y="404" class="text-code">10.0.0.80 (Least-Priv PVE REST)</text>
-  <text x="506" y="420" class="text-body">Autonomous Fleet Health Prober</text>
+  <text x="506" y="388" class="text-header">Autonomous SRE · Butler Agent</text>
+  <text x="506" y="404" class="text-code">Least-Privilege REST Prober</text>
+  <text x="506" y="420" class="text-body">Fleet Health &amp; Incident Triage</text>
 
   <!-- Host Invariants Footer inside Zone 3 -->
   <rect x="494" y="454" width="232" height="122" class="bg-card" rx="4"/>
@@ -173,39 +176,39 @@ SVG_CONTENT = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 620" 
   <text x="506" y="540" class="text-body">• Podman NET_RAW Preserved</text>
   <text x="506" y="558" class="text-green">Sub-2s Batch Telemetry (pct list)</text>
 
-  <!-- ==================== ZONE 4: OBSERVABILITY & TELEMETRY (x: 765 -> 1040) ==================== -->
+  <!-- ==================== ZONE 4: OBSERVABILITY & TELEMETRY (x: 760 -> 1040) ==================== -->
   <rect x="760" y="76" width="280" height="524" class="bg-boundary" rx="4"/>
   <text x="774" y="98" class="text-header">DUAL-PLANE OBSERVABILITY</text>
   <text x="774" y="112" class="text-muted">Probes &amp; Telemetry Aggregation</text>
 
-  <!-- DUAL-PROBE Uptime Kuma Dual-Plane Node -->
+  <!-- Uptime Kuma Dual-Plane Node -->
   <rect x="774" y="130" width="252" height="194" class="bg-card-highlight" rx="4"/>
-  <rect x="782" y="138" width="56" height="16" fill="#10b981" rx="2"/>
-  <text x="787" y="150" fill="#ffffff" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="bold">DUAL-PROBE</text>
-  <text x="846" y="151" class="text-header">Uptime Kuma Dual-Plane</text>
-  <text x="786" y="176" class="text-green">10.0.0.60:3001</text>
+  <rect x="782" y="138" width="90" height="16" fill="#10b981" rx="2"/>
+  <text x="787" y="150" fill="#ffffff" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="bold">DUAL-PLANE</text>
+  <text x="880" y="151" class="text-header">Uptime Kuma</text>
+  <text x="786" y="176" class="text-green">Synthetic Prober Engine</text>
 
   <!-- Probe 1: LAN Probe -->
   <rect x="786" y="190" width="228" height="48" fill="#111114" stroke="#1e1e23" rx="3"/>
   <circle cx="798" cy="206" r="3.5" fill="#10b981"/>
   <text x="808" y="209" class="text-green" font-weight="bold">[LAN] Compute Health</text>
-  <text x="808" y="224" class="text-muted">http://10.0.0.x:port (Zero Latency)</text>
+  <text x="808" y="224" class="text-muted">Raw Container Health (Zero Latency)</text>
 
   <!-- Probe 2: WAN Probe -->
   <rect x="786" y="246" width="228" height="48" fill="#111114" stroke="#1e1e23" rx="3"/>
   <circle cx="798" cy="262" r="3.5" fill="#38bdf8"/>
   <text x="808" y="265" class="text-code" font-weight="bold">[WAN] Edge Reachability</text>
-  <text x="808" y="280" class="text-muted">https://*.edge.internal (TLS + Routing)</text>
+  <text x="808" y="280" class="text-muted">Public Endpoint (TLS + Routing)</text>
 
   <text x="786" y="312" class="text-amber">Correlation: LAN=UP &amp; WAN=DOWN</text>
 
-  <!-- LOG-SINK VictoriaLogs Centralized Telemetry -->
+  <!-- VictoriaLogs Centralized Telemetry -->
   <rect x="774" y="344" width="252" height="140" class="bg-card" rx="4"/>
-  <rect x="782" y="352" width="56" height="16" fill="#6366f1" rx="2"/>
-  <text x="787" y="364" fill="#ffffff" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="bold">LOG-SINK</text>
-  <text x="846" y="365" class="text-header">VictoriaLogs SSoT</text>
-  <text x="786" y="390" class="text-code">10.0.0.70:9428</text>
-  <text x="786" y="410" class="text-body">• Centralized Syslog / Container LogSQL</text>
+  <rect x="782" y="352" width="70" height="16" fill="#6366f1" rx="2"/>
+  <text x="787" y="364" fill="#ffffff" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="bold">LOG-SINK</text>
+  <text x="860" y="365" class="text-header">VictoriaLogs SSoT</text>
+  <text x="786" y="390" class="text-code">LogSQL Query Engine</text>
+  <text x="786" y="410" class="text-body">• Centralized Container Log Ingestion</text>
   <text x="786" y="426" class="text-body">• Fast Incident Triage (Tier-1 First)</text>
   <text x="786" y="442" class="text-body">• Anti-Terminal Hunting Invariant</text>
   <text x="786" y="462" class="text-green">Sub-Second Filter: _time:1h AND error</text>
@@ -213,14 +216,14 @@ SVG_CONTENT = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 620" 
   <!-- Live Telemetry Sync Badge -->
   <rect x="774" y="504" width="252" height="72" class="bg-card" rx="4"/>
   <text x="786" y="524" class="text-header">Telemetry Integration</text>
-  <text x="786" y="542" class="text-body">Dynamic JSON Sync to GitHub Pages</text>
+  <text x="786" y="542" class="text-body">Sanitized JSON Sync to GitHub Pages</text>
   <text x="786" y="558" class="text-code">/data/telemetry.json (Offline Cached)</text>
 
   <!-- ==================== FLOW CONNECTORS & ARROWS ==================== -->
   <!-- 1. External -> Cloudflare -->
   <path d="M 102 214 L 102 270" class="flow-wan" marker-end="url(#arrow-wan)"/>
 
-  <!-- 2. Cloudflare -> Traefik EDGE-PROXY -->
+  <!-- 2. Cloudflare -> Traefik Ingress -->
   <path d="M 173 347 L 198 347 L 198 195 L 224 195" class="flow-wan" marker-end="url(#arrow-wan)"/>
 
   <!-- 3. Traefik -> Authelia ForwardAuth Verification Loop -->
@@ -234,11 +237,11 @@ SVG_CONTENT = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 620" 
   <!-- 5. MikroTik RouterOS DHCP Authority Leases -->
   <path d="M 446 503 L 470 503 L 470 470 L 494 470" class="flow-lan" marker-end="url(#arrow-lan)"/>
 
-  <!-- 6. Uptime Kuma LAN Probes to EDGE-PROXY & COMPUTE -->
+  <!-- 6. Uptime Kuma LAN Probes to Ingress & Workloads -->
   <path d="M 774 214 L 746 214 L 746 175 L 726 175" class="flow-lan" marker-end="url(#arrow-lan)"/>
   <path d="M 774 214 L 746 214 L 746 230 L 726 230" class="flow-lan" marker-end="url(#arrow-lan)"/>
 
-  <!-- 7. Container Logs Stream to VictoriaLogs LOG-SINK -->
+  <!-- 7. Container Logs Stream to VictoriaLogs Sink -->
   <path d="M 726 395 L 774 395" class="flow-telemetry" marker-end="url(#arrow-telemetry)"/>
 
 </svg>
@@ -246,15 +249,21 @@ SVG_CONTENT = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 620" 
 
 def generate():
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    # Strip any extra trailing whitespace
     clean_svg = SVG_CONTENT.strip() + "\n"
     OUTPUT_PATH.write_text(clean_svg, encoding="utf-8")
     size_bytes = OUTPUT_PATH.stat().st_size
     print(f"Generated {OUTPUT_PATH} ({size_bytes} bytes).")
-    assert size_bytes < 25000, f"Size {size_bytes} exceeds 25KB budget!"
+    
+    # Assert OpSec Sanitization
+    assert not re.search(r"192\.168\.", clean_svg), "OpSec Failure: 192.168.x.x leaked in SVG!"
+    assert not re.search(r"labs4it\.dev", clean_svg), "OpSec Failure: private domain leaked in SVG!"
+    assert not re.search(r"\bCT1[0-9]{2}\b", clean_svg), "OpSec Failure: CT container ID leaked in SVG!"
+    
+    # Assert Zero Gradient Law
     assert "linear-gradient" not in clean_svg and "linearGradient" not in clean_svg
     assert "radial-gradient" not in clean_svg and "radialGradient" not in clean_svg
-    print("✅ Verified Zero Gradient Law & 25KB budget successfully.")
+    assert size_bytes < 25000, f"Size {size_bytes} exceeds 25KB budget!"
+    print("✅ Verified 100% OpSec Sanitization, Zero Gradient Law & 25KB budget successfully.")
 
 if __name__ == "__main__":
     generate()

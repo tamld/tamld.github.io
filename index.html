@@ -469,11 +469,9 @@
           <div class="space-y-3">
             <div class="flex items-center justify-between">
               <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-[#1a0f26] text-purple-400 border border-[#3b1a59]">
-                Cognitive Orchestrator
+                🔒 Architecture Case Study
               </span>
-              <a href="https://tamld.github.io/llms-full.txt#second-brain" target="_blank" rel="noopener noreferrer" class="text-zinc-500 group-hover:text-zinc-200 transition-colors">
-                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-              </a>
+              <span class="text-[11px] font-mono text-zinc-500">Private SSoT</span>
             </div>
 
             <h3 class="text-base font-bold text-zinc-100 group-hover:text-purple-400 transition-colors">
@@ -491,10 +489,10 @@
           </div>
 
           <div class="pt-4 mt-4 border-t border-borderHairline flex items-center justify-between text-xs font-mono">
-            <span class="text-zinc-500">Python 3.11 • GitOps</span>
-            <a href="https://tamld.github.io/llms-full.txt#second-brain" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:underline">
-              tamld.github.io/llms-full.txt#second-brain ↗
-            </a>
+            <span class="text-zinc-500">Python 3.11 • Physics Engine</span>
+            <span class="text-purple-400 font-mono text-xs">
+              Proprietary Knowledge Core
+            </span>
           </div>
 
         </div>
@@ -658,10 +656,10 @@
             containers_active: 15
           },
           networking: {
-            gateway: "MikroTik RouterOS 10.0.0.1",
-            dhcp_lease_authority: "RouterOS 10.0.0.1 (Single Authority)",
+            gateway: "MikroTik RouterOS",
+            dhcp_lease_authority: "MikroTik RouterOS (Single Authority DHCP)",
             ingress: "Traefik v3 + CrowdSec (Zero-WAN Management)",
-            remote_mesh: "Tailscale Overlay (Overlay Mesh)"
+            remote_mesh: "Tailscale Overlay Mesh"
           },
           observability: {
             engine: "VictoriaLogs LogSQL",
@@ -823,9 +821,9 @@
 <div class="text-zinc-300 space-y-1 pl-2 border-l border-borderSubtle">
   <div class="text-accentLight font-semibold">[Architecture Topology Drawer Opened]</div>
   <div>• Vector Asset: <a href="/assets/diagrams/arch-dualplane-topology.svg" target="_blank" class="text-accentLight underline">/assets/diagrams/arch-dualplane-topology.svg</a></div>
-  <div>• Perimeter: Cloudflare WAF ➔ Traefik EDGE-PROXY (80/443) ➔ Authelia IAM-AUTH 2FA</div>
-  <div>• Authority: MikroTik RouterOS (10.0.0.1) Static DHCP SSoT</div>
-  <div>• Observability: Dual-Plane Kuma DUAL-PROBE ([LAN] + [WAN]) ➔ VictoriaLogs LOG-SINK</div>
+  <div>• Perimeter: Cloudflare WAF ➔ Traefik (80/443) ➔ Authelia 2FA Gateway</div>
+  <div>• Authority: MikroTik RouterOS (Single Authority DHCP SSoT)</div>
+  <div>• Observability: Dual-Plane Kuma ([LAN] + [WAN]) ➔ VictoriaLogs LogSQL</div>
 </div>`;
       },
 
@@ -859,7 +857,7 @@
 
       'tamld --homelab': () => {
         const s = telemetryData ? telemetryData.substrate : { hypervisor: "Proxmox VE (Node 1)", cpu: "Intel Core i5-8500", ram_total_gb: 16, ram_free_gb: 5, containers_active: 15 };
-        const n = telemetryData ? telemetryData.networking : { gateway: "MikroTik RouterOS 10.0.0.1", dhcp_lease_authority: "RouterOS 10.0.0.1", ingress: "Traefik v3 + CrowdSec", remote_mesh: "Tailscale (Overlay Mesh)" };
+        const n = telemetryData ? telemetryData.networking : { gateway: "MikroTik RouterOS", dhcp_lease_authority: "MikroTik RouterOS (Single Authority DHCP)", ingress: "Traefik v3 + CrowdSec", remote_mesh: "Tailscale Overlay Mesh" };
         const o = telemetryData ? telemetryData.observability : { engine: "VictoriaLogs LogSQL", triage_latency: "<2s fast batch telemetry" };
         return `
 <div class="text-zinc-300 space-y-1 pl-2 border-l border-borderSubtle">
@@ -901,7 +899,7 @@
 <div class="text-zinc-300 space-y-1 pl-2 border-l border-borderSubtle">
   <div>1. <strong class="text-accentLight">g8s</strong>: Zero-Trust subagent capability harness (<a href="https://github.com/tamld/g8s" target="_blank" class="underline">tamld/g8s</a>)</div>
   <div>2. <strong class="text-signalGreen">IaC</strong>: Production bare-metal homelab SRE (<a href="https://github.com/tamld/IaC" target="_blank" class="underline">tamld/IaC</a>)</div>
-  <div>3. <strong class="text-purple-400">tamld-llm-wiki</strong>: Governed Second Brain (<a href="https://tamld.github.io/llms-full.txt#second-brain" target="_blank" class="underline">tamld/tamld-llm-wiki</a>)</div>
+  <div>3. <strong class="text-purple-400">tamld-llm-wiki</strong>: Governed Second Brain (🔒 Private Architecture Case Study)</div>
   <div>4. <strong class="text-rose-400">defense-in-depth</strong>: Telegram HITL approval cards (<a href="https://github.com/tamld/defense-in-depth" target="_blank" class="underline">tamld/defense-in-depth</a>)</div>
 </div>`,
 
