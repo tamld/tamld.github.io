@@ -110,6 +110,31 @@ With over 11 years in enterprise IT operations, bare-metal virtualization, and n
 
 ---
 
+## 7. The Evolution: 11 Years in the Trenches to the Symbiotic Frontier
+
+### Chapter 1: The 48-Hour Crucible (Distributed Command under Crisis - 2016)
+In 2016, a widespread ransomware outbreak crippled over 100 endpoints across a nationwide retail chain (Thiên Nam Hòa). The recovery succeeded not through chaotic firefighting, but through structured operational decomposition:
+- Squad A (Foundation): Environment stabilization and bare-metal Windows staging.
+- Squad B (Application): Redeployment of business-critical SAP ERP and iVend POS systems.
+- Squad C (Verification): Identity access control verification and login integrity checks.
+Pre-built automation scripts and overnight coordinated execution compressed what typically takes weeks into a 48-hour recovery, delivering zero retail downtime on Monday morning.
+
+### Chapter 2: The Departmental Lens (Business Empathy & Domain Decomposition - 2021-2024)
+During tenure at Artstuff, systems engineering was practiced through domain-driven business empathy:
+- HR Domain: Replaced chaotic, unmaintainable Excel ledgers with an auditable Snipe-IT lifecycle management system.
+- Finance Domain: Eliminated single-point-of-failure shared PCs by virtualizing a dedicated MISA accounting server on Hyper-V.
+Decomposing corporate friction into departmental domains enabled continuous, incremental daily operational improvements (Kaizen).
+
+### Chapter 3: The Arithmetic of Determinism (The Automation Equation)
+"A manual click takes 3 seconds. An automated script takes 3 hours. But 100 flawed clicks will cost 3 years."
+True infrastructure reliability comes from an upfront investment in testing, failure analysis, and determinism. This mental model led directly to Tam's AI systems architecture: LLMs cannot be trusted to run on probabilistic prompts; they require deterministic boundary harnesses (Go, Python) and cryptographically verifiable write receipts.
+
+### Chapter 4: The Symbiotic Frontier (Human-AI Symbiosis)
+The primal human instinct when encountering exponential technology is fear. Banning AI out of "Terminator" paranoia is an exercise in futility.
+Instead, the systems engineer's mission is to architect a trusted, safe, and governed substrate (g8s, tamld-llm-wiki, defense-in-depth). In this environment, AI agents are granted structured domain knowledge and decision-making capabilities within strict capability boundaries, co-existing symbiotically with humans to solve complex real-world problems.
+
+---
+
 ## 6. Contact & Collaboration
 - Professional Networking: https://linkedin.com/in/tamld
 - Code Contributions: https://github.com/tamld

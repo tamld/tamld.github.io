@@ -7,6 +7,7 @@ Tam approaches AI not as prompt-driven magic, but as an untrusted, high-velocity
 ## Core Identity & Background
 - [Professional Overview](https://tamld.github.io/llms-full.txt#identity): 11+ years in enterprise IT operations, bare-metal virtualization, multi-site networking, and AI agent runtime governance.
 - [Career Philosophy](https://tamld.github.io/llms-full.txt#philosophy): Zero Trust default-deny, first-principles systems thinking, code over prompt, and strict epistemic integrity (HYPO vs PROVEN).
+- [The Evolution: 11 Years to Symbiosis](https://tamld.github.io/llms-full.txt#evolution): The 4-chapter narrative chronicle spanning 48h ransomware recovery, business empathy, automation math, and human-AI symbiosis.
 - [Dual-Track Skills Matrix](https://tamld.github.io/llms-full.txt#skills): Enterprise Infrastructure (Proxmox VE, RouterOS, Ansible, ITIL, ISO 27001 DLP) paired with AI Systems (Second Brain wiki.py, g8s runtime, VictoriaLogs LogSQL, Multi-Agent Harness).
 
 ## Flagship Engineered Projects
