@@ -127,7 +127,7 @@
           <span class="text-zinc-400 text-xs font-normal">sys.ops</span>
         </a>
 
-        <div class="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-panel border border-borderHairline text-[11px] font-mono text-zinc-400">
+        <div id="header-status-badge" class="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-panel border border-borderHairline text-[11px] font-mono text-zinc-400">
           <span class="text-signalGreen font-bold">●</span> Dual-Plane UP
         </div>
       </div>
@@ -259,24 +259,32 @@
             </div>
           </div>
 
-          <!-- Interactive Input -->
+          <!-- Interactive Input with Tab Autocomplete and History -->
           <div class="p-2.5 bg-black border-t border-borderHairline flex items-center gap-2 font-mono text-xs">
             <span class="text-signalGreen select-none">$</span>
             <input id="terminal-input" type="text" autocomplete="off" spellcheck="false"
-                   placeholder="type 'skills', 'homelab', 'projects'..." 
+                   placeholder="type 'drill', 'ping wan', 'uptime', 'skills' (Tab to complete, ↑/↓ for history)..." 
                    class="flex-1 bg-transparent text-zinc-100 placeholder-zinc-600 focus:outline-none">
-            <button id="terminal-run" class="px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-[11px] transition-colors">
+            <button id="terminal-run" class="px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-[11px] transition-colors" title="Execute Command (Enter)">
               run ↵
             </button>
           </div>
 
           <!-- Chip shortcuts -->
-          <div class="px-3 py-2 bg-[#0c0c0f] border-t border-borderHairline flex flex-wrap gap-1.5 text-[11px] font-mono">
-            <button onclick="termExec('tamld --skills')" class="px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-accentLight transition-colors">skills</button>
-            <button onclick="termExec('tamld --homelab')" class="px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-accentLight transition-colors">homelab</button>
-            <button onclick="termExec('tamld --projects')" class="px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-accentLight transition-colors">projects</button>
-            <button onclick="termExec('tamld --contact')" class="px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-400 transition-colors">contact</button>
-            <button onclick="termExec('clear')" class="px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-500 transition-colors">clear</button>
+          <div class="px-3 py-2 bg-[#0c0c0f] border-t border-borderHairline flex flex-wrap items-center justify-between gap-1.5 text-[11px] font-mono">
+            <div class="flex flex-wrap gap-1.5">
+              <button onclick="termExec('drill')" class="px-2 py-0.5 rounded bg-[#271d0c] hover:bg-[#38280f] text-amber-400 border border-[#4a3413] transition-colors flex items-center gap-1" title="Execute SRE Incident Triage Drill simulation">
+                <span>⚡ drill</span>
+              </button>
+              <button onclick="termExec('ping wan')" class="px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-signalGreen transition-colors" title="Ping WAN edge endpoint">ping</button>
+              <button onclick="termExec('uptime')" class="px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors" title="Check live system uptime">uptime</button>
+              <button onclick="termExec('skills')" class="px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-accentLight transition-colors">skills</button>
+              <button onclick="termExec('topology')" class="px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-accentLight transition-colors">topology</button>
+              <button onclick="termExec('clear')" class="px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-500 transition-colors">clear</button>
+            </div>
+            <div class="hidden sm:inline-block text-[10px] text-zinc-500">
+              press <kbd class="px-1 py-0.5 rounded bg-zinc-800 text-zinc-300">/</kbd> to focus
+            </div>
           </div>
         </div>
 
@@ -379,6 +387,40 @@
           <div>
             <span class="text-zinc-200 font-semibold">3. Dual-Plane Invariant:</span>
             <code class="text-signalGreen">LAN=UP &amp;&amp; WAN=DOWN</code> immediately isolates routing/TLS/WAF failures without manual host SSH loops.
+          </div>
+        </div>
+
+        <!-- Interactive Node Inspector Pills (Zero Gradient, Flat Dark-Tech) -->
+        <div class="pt-3 border-t border-borderHairline space-y-2.5">
+          <div class="flex items-center justify-between text-xs font-mono">
+            <span class="text-zinc-300 flex items-center gap-1.5 font-semibold">
+              <span class="w-1.5 h-1.5 rounded-full bg-accentLight inline-block"></span>
+              Inspect Component Architecture:
+            </span>
+            <span class="text-zinc-500 text-[11px]">Click nodes to audit configuration</span>
+          </div>
+
+          <div class="flex flex-wrap gap-2 text-xs font-mono" id="node-pills">
+            <button onclick="inspectNode('edge')" class="node-pill px-2.5 py-1 rounded border border-accentLight bg-panel text-accentLight transition-all" data-node="edge">
+              EDGE-PROXY (Traefik)
+            </button>
+            <button onclick="inspectNode('auth')" class="node-pill px-2.5 py-1 rounded border border-borderHairline bg-panel text-zinc-400 hover:border-zinc-600 transition-all" data-node="auth">
+              IAM-AUTH (Authelia)
+            </button>
+            <button onclick="inspectNode('dhcp')" class="node-pill px-2.5 py-1 rounded border border-borderHairline bg-panel text-zinc-400 hover:border-zinc-600 transition-all" data-node="dhcp">
+              DHCP-SSOT (RouterOS)
+            </button>
+            <button onclick="inspectNode('dual')" class="node-pill px-2.5 py-1 rounded border border-borderHairline bg-panel text-zinc-400 hover:border-zinc-600 transition-all" data-node="dual">
+              DUAL-PLANE (Uptime Kuma)
+            </button>
+            <button onclick="inspectNode('log')" class="node-pill px-2.5 py-1 rounded border border-borderHairline bg-panel text-zinc-400 hover:border-zinc-600 transition-all" data-node="log">
+              LOG-SINK (VictoriaLogs)
+            </button>
+          </div>
+
+          <!-- Dynamic Node Inspector Output Box -->
+          <div id="node-detail" class="p-3.5 rounded bg-canvas border border-borderHairline font-mono text-xs text-zinc-300 space-y-2">
+            <!-- Rendered dynamically by inspectNode() -->
           </div>
         </div>
       </div>
@@ -768,6 +810,137 @@
     // Initialize Chapter 0
     switchChapter(0);
 
+    // Interactive Architecture Node Inspector
+    const NODES = {
+      edge: {
+        title: "EDGE-PROXY: Traefik v3 + CrowdSec",
+        role: "Perimeter Ingress & TLS Termination",
+        status: "ACTIVE • ZERO-WAN",
+        badge: "border-sky-500/30 text-accentLight bg-[#0c1926]",
+        invariant: "Exposed strictly on ports 80/443 proxied through Cloudflare IP ranges. Zero direct exposure of PVE/RouterOS management planes.",
+        code: `# Traefik Static Configuration (Zero-WAN Ingress)
+entryPoints:
+  websecure:
+    address: ":443"
+    forwardedHeaders:
+      trustedIPs:
+        - "173.245.48.0/20"
+        - "103.21.244.0/22"
+        - "141.101.64.0/18"
+middlewares:
+  crowdsec-bouncer:
+    plugin:
+      crowdsec-bouncer:
+        enabled: true
+        updateInterval: 10s`,
+        correlation: "In dual-plane triage, a Traefik edge or WAF failure causes WAN=DOWN while internal compute remains LAN=UP."
+      },
+      auth: {
+        title: "IAM-AUTH: Authelia 2FA Gateway",
+        role: "Central Identity & Multi-Factor Access Barrier",
+        status: "ENFORCING • TOTP + WebAuthn",
+        badge: "border-amber-500/30 text-amber-400 bg-[#241705]",
+        invariant: "Every administrative route requires two-factor authentication. Zero public bypassing of IAM layer; forward auth checked before container dispatch.",
+        code: `# Authelia Access Control Policy
+access_control:
+  default_policy: deny
+  rules:
+    - domain: "*.internal.mesh"
+      policy: two_factor
+      subject:
+        - "group:infra-admins"
+identity_providers:
+  oidc:
+    enforce_pkce: always`,
+        correlation: "Auth layer degradation blocks external administrative access while internal daemon metrics remain healthy."
+      },
+      dhcp: {
+        title: "DHCP-SSOT: MikroTik RouterOS",
+        role: "Single Authority for Network Identity",
+        status: "AUTHORITATIVE • STATIC LEASE LAW",
+        badge: "border-emerald-500/30 text-signalGreen bg-[#091f15]",
+        invariant: "All LXC containers strictly declare 'ip=dhcp' on net0. Zero hardcoded static IPs in hypervisor configs. RouterOS is the sole MAC-to-IP binding source of truth.",
+        code: `# MikroTik RouterOS Static Lease Export (/export compact)
+/ip dhcp-server lease
+add address=10.10.0.50 mac-address=BC:24:11:A1:02:11 comment="traefik-proxy"
+add address=10.10.0.60 mac-address=BC:24:11:B2:03:22 comment="authelia-iam"
+add address=10.10.0.70 mac-address=BC:24:11:C3:04:33 comment="uptime-kuma"
+/ip dns set allow-remote-requests=yes servers=1.1.1.1,8.8.8.8`,
+        correlation: "Substrate independence: RouterOS queries upstream Anycast resolvers directly, eliminating circular DNS dependencies."
+      },
+      dual: {
+        title: "DUAL-PLANE: Uptime Kuma Telemetry",
+        role: "Sub-Second Fault Isolation & Correlated Probing",
+        status: "MONITORING • 142ms SYNTHETIC RTT",
+        badge: "border-sky-500/30 text-accentLight bg-[#0c1926]",
+        invariant: "Every public service has two monitors: [LAN] internal compute health and [WAN] public edge reachability. LAN=UP && WAN=DOWN pinpoints ingress/TLS faults immediately.",
+        code: `# Dual-Plane Observability Matrix
+Service: Edge Web Ingress
+  Plane 1: [LAN] http://10.10.0.50:8080/ping -> HTTP 200 (1.2ms)
+  Plane 2: [WAN] https://edge.domain.tld/healthz -> HTTP 200 (142ms)
+
+Failure Matrix:
+  LAN=UP   && WAN=DOWN -> Ingress/WAF/Routing Failure
+  LAN=DOWN && WAN=DOWN -> Compute/Container Outage`,
+        correlation: "Eliminates guess-work during incidents; pinpoints failure plane in < 0.8 seconds without manual SSH probing."
+      },
+      log: {
+        title: "LOG-SINK: VictoriaLogs LogSQL",
+        role: "High-Throughput Telemetry & Fast Batch Triage",
+        status: "INDEXING • <2s QUERY LATENCY",
+        badge: "border-purple-500/30 text-purple-400 bg-[#1e0f2b]",
+        invariant: "Centralized LogSQL precedence: Incident triage must query VictoriaLogs before opening interactive SSH sessions into worker containers.",
+        code: `# VictoriaLogs LogSQL Query (HTTP Fast Batch API)
+curl -G http://10.10.0.80:9428/select/logsql/query \\
+  -d 'query=_time:5m AND status_code:>=500 AND service:traefik' \\
+  -d 'limit=100'
+
+# Result: 0 errors in last 300s across 15 active worker containers.`,
+        correlation: "Sub-2-second fast batch telemetry law satisfies the Hardware Reality Invariant with low memory consumption."
+      }
+    };
+
+    function inspectNode(nodeId) {
+      const node = NODES[nodeId];
+      if (!node) return;
+
+      document.querySelectorAll('.node-pill').forEach(pill => {
+        if (pill.getAttribute('data-node') === nodeId) {
+          pill.className = 'node-pill px-2.5 py-1 rounded border border-accentLight bg-panel text-accentLight transition-all';
+        } else {
+          pill.className = 'node-pill px-2.5 py-1 rounded border border-borderHairline bg-panel text-zinc-400 hover:border-zinc-600 transition-all';
+        }
+      });
+
+      const detail = document.getElementById('node-detail');
+      if (!detail) return;
+
+      detail.innerHTML = `
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-borderHairline pb-2.5">
+          <div>
+            <div class="text-zinc-100 font-bold text-sm tracking-tight">${escapeHtml(node.title)}</div>
+            <div class="text-zinc-500 text-[11px]">${escapeHtml(node.role)}</div>
+          </div>
+          <span class="px-2 py-0.5 rounded text-[10px] font-mono border self-start sm:self-auto ${node.badge}">
+            ${escapeHtml(node.status)}
+          </span>
+        </div>
+
+        <div class="space-y-1.5 pt-1 text-[11px]">
+          <div><span class="text-zinc-400 font-semibold">Architectural Invariant:</span> <span class="text-zinc-300">${escapeHtml(node.invariant)}</span></div>
+          <div><span class="text-accentLight font-semibold">Observability Correlation:</span> <span class="text-zinc-300">${escapeHtml(node.correlation)}</span></div>
+        </div>
+
+        <div class="pt-2">
+          <div class="text-[10px] text-zinc-500 uppercase tracking-wider mb-1">Configuration Artifact / Runtime Spec:</div>
+          <pre class="p-2.5 rounded bg-black border border-borderHairline text-[11px] text-zinc-300 overflow-x-auto whitespace-pre-wrap leading-relaxed font-mono">${escapeHtml(node.code)}</pre>
+        </div>
+      `;
+    }
+
+    // Initialize Default Node Inspection
+    inspectNode('edge');
+
     function toggleTopologyDrawer() {
       const drawer = document.getElementById('topology-drawer');
       const chevron = document.getElementById('topology-chevron');
@@ -796,19 +969,111 @@
     const input = document.getElementById('terminal-input');
     const runBtn = document.getElementById('terminal-run');
 
+    const AVAILABLE_CMDS = [
+      'drill',
+      'ping',
+      'ping wan',
+      'ping lan',
+      'uptime',
+      'topology',
+      'story',
+      'skills',
+      'homelab',
+      'status',
+      'telemetry',
+      'projects',
+      'contact',
+      'clear',
+      'help'
+    ];
+
     const CMDS = {
       'help': () => `
-<div class="text-zinc-400 space-y-0.5">
-  <div><span class="text-accentLight">topology</span>  - Dual-plane homelab architecture diagram</div>
-  <div><span class="text-accentLight">story</span>     - 11-year evolution & human-AI symbiosis chronicle</div>
-  <div><span class="text-accentLight">skills</span>    - Dual-track technical capabilities</div>
-  <div><span class="text-accentLight">homelab</span>   - Bare-metal Proxmox & network topology</div>
-  <div><span class="text-accentLight">status</span>    - Dual-plane observability heartbeat</div>
-  <div><span class="text-accentLight">telemetry</span> - Raw JSON SRE telemetry payload</div>
-  <div><span class="text-accentLight">projects</span>  - Flagship open-source repositories</div>
-  <div><span class="text-accentLight">contact</span>   - Direct channels & verified profiles</div>
-  <div><span class="text-accentLight">clear</span>     - Reset terminal screen</div>
+<div class="text-zinc-400 space-y-0.5 font-mono text-[11px]">
+  <div><span class="text-amber-400 font-semibold">drill</span>          - Simulate SRE incident triage drill &amp; root cause isolation</div>
+  <div><span class="text-signalGreen font-semibold">ping [wan|lan]</span> - Transmit simulated ICMP probes to edge or substrate</div>
+  <div><span class="text-zinc-200 font-semibold">uptime</span>         - Real-time substrate uptime &amp; memory budget load</div>
+  <div><span class="text-accentLight">topology</span>       - Expand dual-plane homelab architecture diagram</div>
+  <div><span class="text-accentLight">story</span>          - 11-year evolution &amp; human-AI symbiosis chronicle</div>
+  <div><span class="text-accentLight">skills</span>         - Dual-track technical capabilities (IT Ops + AI Harness)</div>
+  <div><span class="text-accentLight">homelab</span>        - Bare-metal Proxmox &amp; network specifications</div>
+  <div><span class="text-accentLight">status</span>         - Dual-plane observability heartbeat status</div>
+  <div><span class="text-accentLight">telemetry</span>      - Raw JSON SRE telemetry payload</div>
+  <div><span class="text-accentLight">projects</span>       - Flagship open-source repositories</div>
+  <div><span class="text-accentLight">contact</span>        - Direct channels &amp; verified profiles</div>
+  <div><span class="text-accentLight">clear</span>          - Reset terminal screen</div>
 </div>`,
+
+      'drill': () => {
+        const badge = document.getElementById('header-status-badge');
+        if (badge) {
+          badge.className = 'hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#271d0c] border border-[#4a3413] text-[11px] font-mono text-amber-300';
+          badge.innerHTML = `<span class="text-amber-400 font-bold animate-pulse">●</span> <span class="text-amber-300">DRILL: TRIAGE ACTIVE</span>`;
+          setTimeout(() => {
+            badge.className = 'hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-panel border border-borderHairline text-[11px] font-mono text-zinc-400';
+            badge.innerHTML = `<span class="text-signalGreen font-bold">●</span> Dual-Plane UP`;
+          }, 3500);
+        }
+
+        return `
+<div class="text-zinc-300 space-y-2 pl-2 border-l border-amber-500/50 py-1">
+  <div class="text-amber-400 font-semibold flex items-center gap-1.5 font-mono">
+    <span>⚡ [SRE INCIDENT DRILL: SYNTHETIC FAULT TRIAGE INITIATED]</span>
+  </div>
+  
+  <div class="space-y-1 text-[11px]">
+    <div class="text-zinc-400 font-mono"><span class="text-zinc-500">[00:00.000]</span> FAULT INJECTION: Simulating WAN edge probe timeout (504 Gateway Timeout)...</div>
+    <div class="text-zinc-400 font-mono"><span class="text-zinc-500">[00:00.120]</span> DUAL-PLANE PROBE EXECUTION:</div>
+    <div class="pl-3 space-y-0.5 font-mono">
+      <div>• <span class="text-signalGreen font-bold">[LAN]</span> http://10.10.0.50:8080/healthz ➔ <span class="text-signalGreen font-bold">HTTP 200 (1.8ms) [HEALTHY]</span></div>
+      <div>• <span class="text-rose-400 font-bold">[WAN]</span> https://edge.domain.tld/healthz ➔ <span class="text-rose-400 font-bold">HTTP 504 (timeout) [FAILED]</span></div>
+    </div>
+    <div class="text-zinc-400 font-mono"><span class="text-zinc-500">[00:00.450]</span> TELEMETRY CORRELATION (Sub-2s Batch Law):</div>
+    <div class="pl-3 font-mono text-accentLight leading-relaxed">
+      ➔ Rule Correlated: <span class="text-zinc-100 font-bold">LAN=UP && WAN=DOWN</span><br>
+      ➔ Root Cause Isolated in 0.8s: Compute substrate healthy. Edge routing / Cloudflare IP filter barrier triggered.<br>
+      ➔ Invariant: Zero container restart needed. Zero hypervisor host SSH required.
+    </div>
+    <div class="text-signalGreen font-mono pt-1"><span class="text-zinc-500">[00:00.820]</span> ✅ SYNTHETIC FAULT CLEARED — Fleet Dual-Plane correlation restored to 100%.</div>
+  </div>
+</div>`;
+      },
+
+      'ping': (args) => {
+        const target = (args || '').trim().toLowerCase();
+        const isLan = target === 'lan';
+        const dest = isLan ? 'gateway.substrate.local (10.10.0.1)' : 'edge.ingress.mesh (WAN Anycast)';
+        const baseRtt = isLan ? 0.32 : 18.4;
+        
+        return `
+<div class="text-zinc-300 space-y-1 pl-2 border-l border-borderSubtle font-mono text-[11px]">
+  <div class="text-accentLight font-semibold">PING ${dest}: 56 data bytes</div>
+  <div>64 bytes from ${dest}: icmp_seq=1 ttl=64 time=${(baseRtt + 0.05).toFixed(2)} ms</div>
+  <div>64 bytes from ${dest}: icmp_seq=2 ttl=64 time=${(baseRtt - 0.02).toFixed(2)} ms</div>
+  <div>64 bytes from ${dest}: icmp_seq=3 ttl=64 time=${(baseRtt + 0.11).toFixed(2)} ms</div>
+  <div>64 bytes from ${dest}: icmp_seq=4 ttl=64 time=${(baseRtt - 0.08).toFixed(2)} ms</div>
+  <div class="pt-1 text-zinc-400">--- ${dest} ping statistics ---</div>
+  <div class="text-zinc-400">4 packets transmitted, 4 received, 0% packet loss</div>
+  <div class="text-signalGreen">rtt min/avg/max = ${(baseRtt - 0.08).toFixed(2)}/${baseRtt.toFixed(2)}/${(baseRtt + 0.11).toFixed(2)} ms</div>
+</div>`;
+      },
+
+      'ping wan': () => CMDS['ping']('wan'),
+      'ping lan': () => CMDS['ping']('lan'),
+
+      'uptime': () => {
+        const now = new Date();
+        const timeStr = now.toTimeString().split(' ')[0];
+        const s = telemetryData ? telemetryData.substrate : { cpu: "Intel Core i5-8500", ram_total_gb: 16, ram_free_gb: 5, containers_active: 15 };
+        return `
+<div class="text-zinc-300 space-y-1 pl-2 border-l border-borderSubtle font-mono text-[11px]">
+  <div class="text-signalGreen font-semibold">${timeStr} up 42 days, 14:28, 1 user, load average: 0.18, 0.22, 0.19</div>
+  <div>• Substrate: Proxmox VE 8.x (${s.cpu})</div>
+  <div>• Memory Budget: ${s.ram_total_gb}GB Hard Limit (~${s.ram_free_gb}GB Headroom)</div>
+  <div>• Workload: ${s.containers_active} Active LXC Containers (net0: ip=dhcp)</div>
+  <div>• SSoT Invariant: Single MikroTik RouterOS DHCP Authority</div>
+</div>`;
+      },
 
       'tamld --topology': () => {
         const drawer = document.getElementById('topology-drawer');
@@ -818,7 +1083,7 @@
           if (chevron) chevron.classList.add('rotate-180');
         }
         return `
-<div class="text-zinc-300 space-y-1 pl-2 border-l border-borderSubtle">
+<div class="text-zinc-300 space-y-1 pl-2 border-l border-borderSubtle font-mono text-[11px]">
   <div class="text-accentLight font-semibold">[Architecture Topology Drawer Opened]</div>
   <div>• Vector Asset: <a href="/assets/diagrams/arch-dualplane-topology.svg" target="_blank" class="text-accentLight underline">/assets/diagrams/arch-dualplane-topology.svg</a></div>
   <div>• Perimeter: Cloudflare WAF ➔ Traefik (80/443) ➔ Authelia 2FA Gateway</div>
@@ -830,26 +1095,26 @@
       'topology': () => CMDS['tamld --topology'](),
 
       'tamld --story': () => `
-<div class="text-zinc-300 space-y-1.5 pl-2 border-l border-borderSubtle">
+<div class="text-zinc-300 space-y-1.5 pl-2 border-l border-borderSubtle font-mono text-[11px]">
   <div class="text-accentLight font-semibold">[The Evolution: 11 Years in the Trenches to the Symbiotic Frontier]</div>
   <div><span class="text-amber-400 font-semibold">Ch. 01 - The 48-Hour Crucible (2016):</span> 100+ endpoints restored from ransomware via decoupled squads and pre-flight automation. Zero Monday downtime.</div>
   <div><span class="text-signalGreen font-semibold">Ch. 02 - The Departmental Lens (2021-2024):</span> Business empathy via domain decomposition (Snipe-IT for HR, virtualized MISA for Finance). 1% daily compounding.</div>
   <div><span class="text-purple-400 font-semibold">Ch. 03 - The Arithmetic of Determinism:</span> Manual clicks take 3s; automation takes 3h; but 100 wrong clicks cost 3 years. Code over prompt.</div>
   <div><span class="text-rose-400 font-semibold">Ch. 04 - The Symbiotic Frontier (Present):</span> Rejecting AI fear; architecting trusted substrates (g8s, wiki.py) for safe Human-AI co-existence.</div>
-  <div class="pt-1 text-xs text-zinc-400">Read full chronicle: <a href="#evolution" class="text-accentLight underline">tamld.github.io/#journey</a> | <a href="/llms-full.txt#evolution" class="text-accentLight underline">/llms-full.txt</a></div>
+  <div class="pt-1 text-xs text-zinc-400">Read full chronicle: <a href="#journey" class="text-accentLight underline">tamld.github.io/#journey</a> | <a href="/llms-full.txt#evolution" class="text-accentLight underline">/llms-full.txt</a></div>
 </div>`,
 
       'story': () => CMDS['tamld --story'](),
 
       'tamld --skills': () => `
-<div class="text-zinc-300 space-y-1.5 pl-2 border-l border-borderSubtle">
+<div class="text-zinc-300 space-y-1.5 pl-2 border-l border-borderSubtle font-mono text-[11px]">
   <div class="text-amber-400 font-semibold">[Track 1: Enterprise IT Ops]</div>
   <div class="text-zinc-400">• Proxmox VE, KVM, Rootless Podman, Docker Compose</div>
   <div class="text-zinc-400">• MikroTik RouterOS (BGP, WireGuard, DHCP Authority, VLANs)</div>
   <div class="text-zinc-400">• Ansible Automation, ZFS Pipelines, ITIL, ISO 27001 DLP</div>
   <div class="text-accentLight font-semibold pt-1">[Track 2: AI Systems & Harness]</div>
   <div class="text-zinc-400">• g8s process execution, capability dropping & write receipts</div>
-  <div class="text-zinc-400">• tamld-llm-wiki (ADLC FSM, wiki.py physics engine)</div>
+  <div class="text-zinc-400">• Deterministic Second Brain (ADLC FSM, physics engine)</div>
   <div class="text-zinc-400">• VictoriaLogs LogSQL telemetry & Uptime Kuma dual-plane</div>
 </div>`,
 
@@ -860,7 +1125,7 @@
         const n = telemetryData ? telemetryData.networking : { gateway: "MikroTik RouterOS", dhcp_lease_authority: "MikroTik RouterOS (Single Authority DHCP)", ingress: "Traefik v3 + CrowdSec", remote_mesh: "Tailscale Overlay Mesh" };
         const o = telemetryData ? telemetryData.observability : { engine: "VictoriaLogs LogSQL", triage_latency: "<2s fast batch telemetry" };
         return `
-<div class="text-zinc-300 space-y-1 pl-2 border-l border-borderSubtle">
+<div class="text-zinc-300 space-y-1 pl-2 border-l border-borderSubtle font-mono text-[11px]">
   <div class="text-signalGreen font-semibold">[Bare-Metal Homelab SRE Specs]</div>
   <div>• Hypervisor: ${s.hypervisor} (${s.cpu})</div>
   <div>• Memory Budget: ${s.ram_total_gb}GB Hard Limit (~${s.ram_free_gb}GB Headroom, ${s.containers_active} Containers)</div>
@@ -877,7 +1142,7 @@
         const dp = telemetryData && telemetryData.dual_plane ? telemetryData.dual_plane : { lan: "UP", wan: "UP", probe_latency_ms: 142 };
         const stat = telemetryData ? telemetryData.status : "OPERATIONAL";
         return `
-<div class="text-zinc-300 space-y-0.5 pl-2 border-l border-borderSubtle">
+<div class="text-zinc-300 space-y-0.5 pl-2 border-l border-borderSubtle font-mono text-[11px]">
   <div>• Fleet Status: <span class="text-signalGreen">${stat}</span></div>
   <div>• Dual-Plane Monitoring: [LAN: ${dp.lan}] [WAN: ${dp.wan}] (${dp.probe_latency_ms}ms)</div>
   <div>• Audit Compliance: 100% Deterministic ADLC / Zero-Leakage DLP</div>
@@ -888,7 +1153,7 @@
 
       'tamld --telemetry': () => {
         if (!telemetryData) {
-          return `<div class="text-zinc-400">Telemetry endpoint: <a href="/data/telemetry.json" target="_blank" class="text-accentLight underline">/data/telemetry.json</a></div>`;
+          return `<div class="text-zinc-400 font-mono text-[11px]">Telemetry endpoint: <a href="/data/telemetry.json" target="_blank" class="text-accentLight underline">/data/telemetry.json</a></div>`;
         }
         return `<pre class="text-[11px] text-zinc-300 font-mono leading-tight whitespace-pre-wrap">${escapeHtml(JSON.stringify(telemetryData, null, 2))}</pre>`;
       },
@@ -896,17 +1161,17 @@
       'telemetry': () => CMDS['tamld --telemetry'](),
 
       'tamld --projects': () => `
-<div class="text-zinc-300 space-y-1 pl-2 border-l border-borderSubtle">
+<div class="text-zinc-300 space-y-1 pl-2 border-l border-borderSubtle font-mono text-[11px]">
   <div>1. <strong class="text-accentLight">g8s</strong>: Zero-Trust subagent capability harness (<a href="https://github.com/tamld/g8s" target="_blank" class="underline">tamld/g8s</a>)</div>
   <div>2. <strong class="text-signalGreen">IaC</strong>: Production bare-metal homelab SRE (<a href="https://github.com/tamld/IaC" target="_blank" class="underline">tamld/IaC</a>)</div>
-  <div>3. <strong class="text-purple-400">tamld-llm-wiki</strong>: Governed Second Brain (🔒 Private Architecture Case Study)</div>
+  <div>3. <strong class="text-purple-400">Second Brain</strong>: Governed Knowledge SSoT (🔒 Private Architecture Case Study)</div>
   <div>4. <strong class="text-rose-400">defense-in-depth</strong>: Telegram HITL approval cards (<a href="https://github.com/tamld/defense-in-depth" target="_blank" class="underline">tamld/defense-in-depth</a>)</div>
 </div>`,
 
       'projects': () => CMDS['tamld --projects'](),
 
       'tamld --contact': () => `
-<div class="text-zinc-300 space-y-0.5 pl-2 border-l border-borderSubtle">
+<div class="text-zinc-300 space-y-0.5 pl-2 border-l border-borderSubtle font-mono text-[11px]">
   <div>• Email: <a href="mailto:ductam1828@gmail.com" class="text-accentLight underline">ductam1828@gmail.com</a></div>
   <div>• LinkedIn: <a href="https://linkedin.com/in/tamld" target="_blank" class="text-accentLight underline">linkedin.com/in/tamld</a></div>
   <div>• GitHub: <a href="https://github.com/tamld" target="_blank" class="text-accentLight underline">github.com/tamld</a></div>
@@ -921,6 +1186,11 @@
       }
     };
 
+    // Terminal History State
+    const cmdHistory = [];
+    let historyIndex = -1;
+    let currentDraft = '';
+
     function termExec(raw) {
       const cmd = raw.trim();
       if (!cmd) return;
@@ -929,17 +1199,29 @@
       line.innerHTML = `<span class="text-signalGreen">guest@tamld:~$</span> <span class="text-zinc-100">${escapeHtml(cmd)}</span>`;
       screen.appendChild(line);
 
-      const fn = CMDS[cmd.toLowerCase()];
+      const lower = cmd.toLowerCase();
+      let fn = CMDS[lower];
+      let args = '';
+
+      if (!fn) {
+        const parts = lower.split(/\s+/);
+        const base = parts[0];
+        args = parts.slice(1).join(' ');
+        if (CMDS[base]) {
+          fn = () => CMDS[base](args);
+        }
+      }
+
       if (fn) {
-        const out = fn();
-        if (out !== null) {
+        const out = fn(args);
+        if (out !== null && out !== undefined) {
           const outEl = document.createElement('div');
           outEl.innerHTML = out;
           screen.appendChild(outEl);
         }
       } else {
         const err = document.createElement('div');
-        err.className = 'text-rose-400';
+        err.className = 'text-rose-400 font-mono text-[11px]';
         err.innerHTML = `command not found: ${escapeHtml(cmd)}. Type <span class="text-accentLight">help</span> for list.`;
         screen.appendChild(err);
       }
@@ -955,14 +1237,71 @@
       if (e.key === 'Enter') {
         const v = input.value;
         input.value = '';
+        if (v.trim()) {
+          if (cmdHistory.length === 0 || cmdHistory[cmdHistory.length - 1] !== v.trim()) {
+            cmdHistory.push(v.trim());
+          }
+          historyIndex = cmdHistory.length;
+          currentDraft = '';
+        }
         termExec(v);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (cmdHistory.length === 0) return;
+        if (historyIndex === cmdHistory.length) {
+          currentDraft = input.value;
+        }
+        if (historyIndex > 0) {
+          historyIndex--;
+          input.value = cmdHistory[historyIndex];
+        }
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (cmdHistory.length === 0) return;
+        if (historyIndex < cmdHistory.length - 1) {
+          historyIndex++;
+          input.value = cmdHistory[historyIndex];
+        } else if (historyIndex === cmdHistory.length - 1) {
+          historyIndex = cmdHistory.length;
+          input.value = currentDraft;
+        }
+      } else if (e.key === 'Tab') {
+        e.preventDefault();
+        const val = input.value.trim().toLowerCase();
+        if (!val) return;
+        const candidates = AVAILABLE_CMDS.filter(c => c.startsWith(val));
+        if (candidates.length === 1) {
+          input.value = candidates[0];
+        } else if (candidates.length > 1) {
+          const listEl = document.createElement('div');
+          listEl.className = 'text-zinc-500 text-[11px] font-mono pl-2 border-l border-borderSubtle';
+          listEl.textContent = candidates.join('   ');
+          screen.appendChild(listEl);
+          screen.scrollTop = screen.scrollHeight;
+        }
       }
     });
 
     runBtn.addEventListener('click', () => {
       const v = input.value;
       input.value = '';
+      if (v.trim()) {
+        if (cmdHistory.length === 0 || cmdHistory[cmdHistory.length - 1] !== v.trim()) {
+          cmdHistory.push(v.trim());
+        }
+        historyIndex = cmdHistory.length;
+        currentDraft = '';
+      }
       termExec(v);
+    });
+
+    // Global '/' hotkey to focus terminal
+    window.addEventListener('keydown', (e) => {
+      if (e.key === '/' && document.activeElement !== input && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+        input.focus();
+        input.select();
+      }
     });
   </script>
 </body>
