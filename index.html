@@ -51,8 +51,38 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Structured Data: Schema.org Entity Profile -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "dateCreated": "2026-10-07T00:00:00Z",
+    "dateModified": "2026-10-08T00:00:00Z",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "Le Duc Tam",
+      "alternateName": "tamld",
+      "jobTitle": "Systems Engineer & AI Agent Systems Architect",
+      "description": "11+ years enterprise IT infrastructure operations, Linux virtualization, networking, and deterministic AI agentic systems engineering.",
+      "url": "https://tamld.github.io/",
+      "image": "https://github.com/tamld.png",
+      "sameAs": [
+        "https://github.com/tamld",
+        "https://linkedin.com/in/tamld"
+      ],
+      "knowsAbout": [
+        "Enterprise IT Infrastructure",
+        "Linux Virtualization & LXC",
+        "Proxmox VE",
+        "MikroTik RouterOS",
+        "Ansible Automation",
+        "Deterministic AI Agent Systems",
+        "VictoriaLogs Telemetry",
+        "GitOps & Zero-Leakage DLP"
+      ]
+    }
+  }
+  </script>
 
   <style>
     /* Custom Scrollbar - Solid & Minimal */
@@ -74,6 +104,64 @@
   </style>
 </head>
 <body class="bg-canvas text-zinc-300 font-sans antialiased min-h-screen selection:bg-sky-500/20 selection:text-sky-300">
+
+  <!-- Self-Contained SVG Icon Sprite (Zero CDN Dependencies) -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <defs>
+      <symbol id="icon-bot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 17v1"/><path d="M15 17v1"/><path d="M9 7h6"/><path d="M12 7v3"/>
+      </symbol>
+      <symbol id="icon-github" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/>
+      </symbol>
+      <symbol id="icon-linkedin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/>
+      </symbol>
+      <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+      </symbol>
+      <symbol id="icon-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/>
+      </symbol>
+      <symbol id="icon-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/>
+      </symbol>
+      <symbol id="icon-router" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect width="20" height="8" x="2" y="14" rx="2"/><path d="M6.01 18H6"/><path d="M10.01 18H10"/><path d="M15 10v4"/><path d="M17.84 7.17a4 4 0 0 0-5.66 0"/><path d="M20.66 4.34a8 8 0 0 0-11.31 0"/>
+      </symbol>
+      <symbol id="icon-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/>
+      </symbol>
+      <symbol id="icon-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+      </symbol>
+      <symbol id="icon-workflow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/>
+      </symbol>
+      <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
+      </symbol>
+      <symbol id="icon-network" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/>
+      </symbol>
+      <symbol id="icon-activity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.48 12H2"/>
+      </symbol>
+      <symbol id="icon-arrow-up-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
+      </symbol>
+      <symbol id="icon-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/>
+      </symbol>
+      <symbol id="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+      </symbol>
+      <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"/>
+      </symbol>
+    </defs>
+  </svg>
+
 
   <!-- TOP BAR: Solid, Flat Precision (Zero Gradient, Zero Blur) -->
   <header class="sticky top-0 z-50 bg-canvas border-b border-borderHairline px-4 sm:px-8 py-3">
@@ -100,19 +188,19 @@
         <a href="#invariants" class="hidden md:inline-block text-zinc-400 hover:text-zinc-100 py-1 px-2 transition-colors">Invariants</a>
 
         <a href="/llms.txt" class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-panel border border-borderSubtle text-accentLight hover:border-zinc-500 transition-colors" title="View Machine-Readable LLM Index">
-          <i data-lucide="bot" class="w-3.5 h-3.5"></i>
+          <svg class="w-3.5 h-3.5"><use href="#icon-bot"></use></svg>
           <span>/llms.txt</span>
         </a>
 
         <div class="flex items-center gap-1.5 pl-2 border-l border-borderHairline text-zinc-400">
           <a href="https://github.com/tamld" target="_blank" rel="noopener noreferrer" class="p-1.5 rounded hover:text-zinc-100 hover:bg-panel transition-colors" title="GitHub">
-            <i data-lucide="github" class="w-4 h-4"></i>
+            <svg class="w-4 h-4"><use href="#icon-github"></use></svg>
           </a>
           <a href="https://linkedin.com/in/tamld" target="_blank" rel="noopener noreferrer" class="p-1.5 rounded hover:text-zinc-100 hover:bg-panel transition-colors" title="LinkedIn">
-            <i data-lucide="linkedin" class="w-4 h-4"></i>
+            <svg class="w-4 h-4"><use href="#icon-linkedin"></use></svg>
           </a>
           <a href="mailto:ductam1828@gmail.com" class="p-1.5 rounded hover:text-zinc-100 hover:bg-panel transition-colors" title="Email">
-            <i data-lucide="mail" class="w-4 h-4"></i>
+            <svg class="w-4 h-4"><use href="#icon-mail"></use></svg>
           </a>
         </div>
       </div>
@@ -176,15 +264,15 @@
         <!-- Direct Action Anchors -->
         <div class="flex flex-wrap items-center gap-3 pt-2 font-mono text-xs">
           <a href="#systems" class="px-4 py-2 rounded bg-zinc-100 text-zinc-950 font-medium hover:bg-white transition-colors flex items-center gap-1.5">
-            <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+            <svg class="w-3.5 h-3.5"><use href="#icon-layers"></use></svg>
             <span>Engineered Systems</span>
           </a>
           <a href="https://github.com/tamld" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded bg-panel border border-borderSubtle text-zinc-300 hover:text-white hover:border-zinc-500 transition-colors flex items-center gap-1.5">
-            <i data-lucide="github" class="w-3.5 h-3.5"></i>
+            <svg class="w-3.5 h-3.5"><use href="#icon-github"></use></svg>
             <span>GitHub Profile</span>
           </a>
           <a href="https://linkedin.com/in/tamld" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded bg-panel border border-borderSubtle text-zinc-300 hover:text-white hover:border-zinc-500 transition-colors flex items-center gap-1.5">
-            <i data-lucide="linkedin" class="w-3.5 h-3.5"></i>
+            <svg class="w-3.5 h-3.5"><use href="#icon-linkedin"></use></svg>
             <span>LinkedIn</span>
           </a>
         </div>
@@ -254,35 +342,35 @@
 
       <div class="flex flex-wrap items-center justify-between gap-6 opacity-80 font-mono text-xs text-zinc-300">
         <div class="flex items-center gap-2 hover:text-white transition-colors">
-          <i data-lucide="server" class="w-4 h-4 text-amber-500"></i>
+          <svg class="w-4 h-4 text-amber-500"><use href="#icon-server"></use></svg>
           <span>Proxmox VE</span>
         </div>
         <div class="flex items-center gap-2 hover:text-white transition-colors">
-          <i data-lucide="router" class="w-4 h-4 text-sky-400"></i>
+          <svg class="w-4 h-4 text-sky-400"><use href="#icon-router"></use></svg>
           <span>MikroTik RouterOS</span>
         </div>
         <div class="flex items-center gap-2 hover:text-white transition-colors">
-          <i data-lucide="terminal" class="w-4 h-4 text-emerald-400"></i>
+          <svg class="w-4 h-4 text-emerald-400"><use href="#icon-terminal"></use></svg>
           <span>Go / Golang</span>
         </div>
         <div class="flex items-center gap-2 hover:text-white transition-colors">
-          <i data-lucide="code" class="w-4 h-4 text-blue-400"></i>
+          <svg class="w-4 h-4 text-blue-400"><use href="#icon-code"></use></svg>
           <span>Python 3.11</span>
         </div>
         <div class="flex items-center gap-2 hover:text-white transition-colors">
-          <i data-lucide="workflow" class="w-4 h-4 text-red-400"></i>
+          <svg class="w-4 h-4 text-red-400"><use href="#icon-workflow"></use></svg>
           <span>Ansible IaC</span>
         </div>
         <div class="flex items-center gap-2 hover:text-white transition-colors">
-          <i data-lucide="shield" class="w-4 h-4 text-cyan-400"></i>
+          <svg class="w-4 h-4 text-cyan-400"><use href="#icon-shield"></use></svg>
           <span>Traefik v3</span>
         </div>
         <div class="flex items-center gap-2 hover:text-white transition-colors">
-          <i data-lucide="network" class="w-4 h-4 text-indigo-400"></i>
+          <svg class="w-4 h-4 text-indigo-400"><use href="#icon-network"></use></svg>
           <span>Tailscale Mesh</span>
         </div>
         <div class="flex items-center gap-2 hover:text-white transition-colors">
-          <i data-lucide="activity" class="w-4 h-4 text-emerald-400"></i>
+          <svg class="w-4 h-4 text-emerald-400"><use href="#icon-activity"></use></svg>
           <span>VictoriaLogs</span>
         </div>
       </div>
@@ -311,7 +399,7 @@
                 Core Runtime • Pure Go 1.22+
               </span>
               <a href="https://github.com/tamld/g8s" target="_blank" rel="noopener noreferrer" class="text-zinc-500 group-hover:text-zinc-200 transition-colors">
-                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                <svg class="w-4 h-4"><use href="#icon-arrow-up-right"></use></svg>
               </a>
             </div>
 
@@ -353,7 +441,7 @@
                 Bare-Metal SRE
               </span>
               <a href="https://github.com/tamld/IaC" target="_blank" rel="noopener noreferrer" class="text-zinc-500 group-hover:text-zinc-200 transition-colors">
-                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                <svg class="w-4 h-4"><use href="#icon-arrow-up-right"></use></svg>
               </a>
             </div>
 
@@ -389,7 +477,7 @@
                 Cognitive Orchestrator
               </span>
               <a href="https://tamld.github.io/llms-full.txt#second-brain" target="_blank" rel="noopener noreferrer" class="text-zinc-500 group-hover:text-zinc-200 transition-colors">
-                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                <svg class="w-4 h-4"><use href="#icon-arrow-up-right"></use></svg>
               </a>
             </div>
 
@@ -425,7 +513,7 @@
                 HITL Remediation
               </span>
               <a href="https://github.com/tamld/defense-in-depth" target="_blank" rel="noopener noreferrer" class="text-zinc-500 group-hover:text-zinc-200 transition-colors">
-                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                <svg class="w-4 h-4"><use href="#icon-arrow-up-right"></use></svg>
               </a>
             </div>
 
@@ -474,7 +562,7 @@
         <div class="p-6 rounded-lg bg-panel border border-borderSubtle space-y-4">
           <div class="flex items-center gap-3">
             <div class="p-2 rounded bg-zinc-900 border border-borderHairline text-amber-400">
-              <i data-lucide="server" class="w-4 h-4"></i>
+              <svg class="w-4 h-4"><use href="#icon-server"></use></svg>
             </div>
             <div>
               <h3 class="font-bold text-zinc-100 text-sm sm:text-base">Track 1: Enterprise IT Operations &amp; SRE</h3>
@@ -510,7 +598,7 @@
         <div class="p-6 rounded-lg bg-panel border border-borderSubtle space-y-4">
           <div class="flex items-center gap-3">
             <div class="p-2 rounded bg-zinc-900 border border-borderHairline text-accentLight">
-              <i data-lucide="cpu" class="w-4 h-4"></i>
+              <svg class="w-4 h-4"><use href="#icon-cpu"></use></svg>
             </div>
             <div>
               <h3 class="font-bold text-zinc-100 text-sm sm:text-base">Track 2: AI Systems &amp; Governed Harnesses</h3>
@@ -597,7 +685,7 @@
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div class="space-y-1">
           <div class="flex items-center gap-2 text-xs font-mono text-zinc-300">
-            <i data-lucide="bot" class="w-4 h-4 text-accentLight"></i>
+            <svg class="w-4 h-4 text-accentLight"><use href="#icon-bot"></use></svg>
             <span class="font-semibold text-zinc-100">Machine-Readable Discovery Endpoint</span>
             <span class="text-zinc-600">•</span>
             <span class="text-zinc-500">llmstxt.org</span>
@@ -623,7 +711,7 @@
           <span id="curl-cmd">curl -sL https://tamld.github.io/llms.txt</span>
         </div>
         <button onclick="copyCurl()" id="copy-btn" class="px-2 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-[11px] transition-colors shrink-0 flex items-center gap-1">
-          <i data-lucide="copy" class="w-3 h-3"></i>
+          <svg class="w-3 h-3"><use href="#icon-copy"></use></svg>
           <span>Copy</span>
         </button>
       </div>
@@ -648,17 +736,44 @@
 
   <!-- SCRIPT: Terminal & Copy Utilities -->
   <script>
-    lucide.createIcons();
+    // Live Telemetry Cache with Instant Offline/File Fallback
+    let telemetryData = null;
+    fetch('/data/telemetry.json')
+      .then(res => res.json())
+      .then(data => { telemetryData = data; })
+      .catch(() => {
+        // Fallback for file:// protocol or offline access
+        telemetryData = {
+          status: "OPERATIONAL",
+          dual_plane: { lan: "UP", wan: "UP", probe_latency_ms: 142 },
+          substrate: {
+            hypervisor: "Proxmox VE 8.x (Node 1)",
+            cpu: "Intel Core i5-8500 (6 Cores)",
+            ram_total_gb: 16,
+            ram_free_gb: 5,
+            containers_active: 15
+          },
+          networking: {
+            gateway: "MikroTik RouterOS 10.0.0.1",
+            dhcp_lease_authority: "RouterOS 10.0.0.1 (Single Authority)",
+            ingress: "Traefik v3 + CrowdSec (Zero-WAN Management)",
+            remote_mesh: "Tailscale Overlay (Overlay Mesh)"
+          },
+          observability: {
+            engine: "VictoriaLogs LogSQL",
+            triage_latency: "<2s fast batch telemetry",
+            audit_compliance: "100% Deterministic ADLC / Zero-Leakage DLP"
+          }
+        };
+      });
 
     function copyCurl() {
       const text = document.getElementById('curl-cmd').innerText;
       navigator.clipboard.writeText(text).then(() => {
         const btn = document.getElementById('copy-btn');
-        btn.innerHTML = `<i data-lucide="check" class="w-3 h-3 text-signalGreen"></i><span class="text-signalGreen">Copied!</span>`;
-        lucide.createIcons();
+        btn.innerHTML = `<svg class="w-3 h-3 text-signalGreen"><use href="#icon-check"></use></svg><span class="text-signalGreen">Copied!</span>`;
         setTimeout(() => {
-          btn.innerHTML = `<i data-lucide="copy" class="w-3 h-3"></i><span>Copy</span>`;
-          lucide.createIcons();
+          btn.innerHTML = `<svg class="w-3 h-3"><use href="#icon-copy"></use></svg><span>Copy</span>`;
         }, 2000);
       });
     }
@@ -670,11 +785,13 @@
     const CMDS = {
       'help': () => `
 <div class="text-zinc-400 space-y-0.5">
-  <div><span class="text-accentLight">skills</span>    - Dual-track technical capabilities</div>
-  <div><span class="text-accentLight">homelab</span>   - Bare-metal Proxmox & network topology</div>
-  <div><span class="text-accentLight">projects</span>  - Flagship open-source repositories</div>
-  <div><span class="text-accentLight">contact</span>   - Direct channels & verified profiles</div>
-  <div><span class="text-accentLight">clear</span>     - Reset terminal screen</div>
+  <div><span class="text-accentLight">skills</span>     - Dual-track technical capabilities</div>
+  <div><span class="text-accentLight">homelab</span>    - Bare-metal Proxmox & network topology</div>
+  <div><span class="text-accentLight">status</span>     - Dual-plane observability heartbeat</div>
+  <div><span class="text-accentLight">telemetry</span>  - Raw JSON SRE telemetry payload</div>
+  <div><span class="text-accentLight">projects</span>   - Flagship open-source repositories</div>
+  <div><span class="text-accentLight">contact</span>    - Direct channels & verified profiles</div>
+  <div><span class="text-accentLight">clear</span>      - Reset terminal screen</div>
 </div>`,
 
       'tamld --skills': () => `
@@ -691,17 +808,45 @@
 
       'skills': () => CMDS['tamld --skills'](),
 
-      'tamld --homelab': () => `
+      'tamld --homelab': () => {
+        const s = telemetryData ? telemetryData.substrate : { hypervisor: "Proxmox VE (Node 1)", cpu: "Intel Core i5-8500", ram_total_gb: 16, ram_free_gb: 5, containers_active: 15 };
+        const n = telemetryData ? telemetryData.networking : { gateway: "MikroTik RouterOS 10.0.0.1", dhcp_lease_authority: "RouterOS 10.0.0.1", ingress: "Traefik v3 + CrowdSec", remote_mesh: "Tailscale (Overlay Mesh)" };
+        const o = telemetryData ? telemetryData.observability : { engine: "VictoriaLogs LogSQL", triage_latency: "<2s fast batch telemetry" };
+        return `
 <div class="text-zinc-300 space-y-1 pl-2 border-l border-borderSubtle">
   <div class="text-signalGreen font-semibold">[Bare-Metal Homelab SRE Specs]</div>
-  <div>• Hypervisor: Proxmox VE (i5-8500, 16GB Hard RAM Budget)</div>
-  <div>• Gateway: MikroTik RouterOS 10.0.0.1 (DHCP Lease Authority)</div>
-  <div>• Perimeter: Traefik v3 + CrowdSec (Zero-WAN Management)</div>
-  <div>• Private Mesh: Tailscale Zero-Trust Overlay (Overlay Mesh)</div>
-  <div>• Telemetry: VictoriaLogs LogSQL (&lt;2s Triage), Dual-Plane Health</div>
-</div>`,
+  <div>• Hypervisor: ${s.hypervisor} (${s.cpu})</div>
+  <div>• Memory Budget: ${s.ram_total_gb}GB Hard Limit (~${s.ram_free_gb}GB Headroom, ${s.containers_active} Containers)</div>
+  <div>• Gateway / DHCP SSoT: ${n.dhcp_lease_authority || n.gateway}</div>
+  <div>• Perimeter: ${n.ingress}</div>
+  <div>• Private Mesh: ${n.remote_mesh}</div>
+  <div>• Telemetry: ${o.engine} (${o.triage_latency})</div>
+</div>`;
+      },
 
       'homelab': () => CMDS['tamld --homelab'](),
+
+      'tamld --status': () => {
+        const dp = telemetryData && telemetryData.dual_plane ? telemetryData.dual_plane : { lan: "UP", wan: "UP", probe_latency_ms: 142 };
+        const stat = telemetryData ? telemetryData.status : "OPERATIONAL";
+        return `
+<div class="text-zinc-300 space-y-0.5 pl-2 border-l border-borderSubtle">
+  <div>• Fleet Status: <span class="text-signalGreen">${stat}</span></div>
+  <div>• Dual-Plane Monitoring: [LAN: ${dp.lan}] [WAN: ${dp.wan}] (${dp.probe_latency_ms}ms)</div>
+  <div>• Audit Compliance: 100% Deterministic ADLC / Zero-Leakage DLP</div>
+</div>`;
+      },
+
+      'status': () => CMDS['tamld --status'](),
+
+      'tamld --telemetry': () => {
+        if (!telemetryData) {
+          return `<div class="text-zinc-400">Telemetry endpoint: <a href="/data/telemetry.json" target="_blank" class="text-accentLight underline">/data/telemetry.json</a></div>`;
+        }
+        return `<pre class="text-[11px] text-zinc-300 font-mono leading-tight whitespace-pre-wrap">${escapeHtml(JSON.stringify(telemetryData, null, 2))}</pre>`;
+      },
+
+      'telemetry': () => CMDS['tamld --telemetry'](),
 
       'tamld --projects': () => `
 <div class="text-zinc-300 space-y-1 pl-2 border-l border-borderSubtle">
@@ -722,15 +867,6 @@
 </div>`,
 
       'contact': () => CMDS['tamld --contact'](),
-
-      'tamld --status': () => `
-<div class="text-zinc-300 space-y-0.5 pl-2 border-l border-borderSubtle">
-  <div>• Fleet Status: <span class="text-signalGreen">Operational</span></div>
-  <div>• Dual-Plane Monitoring: [LAN: UP] [WAN: UP]</div>
-  <div>• Last Audit: Pass (100% Deterministic Gates)</div>
-</div>`,
-
-      'status': () => CMDS['tamld --status'](),
 
       'clear': () => {
         screen.innerHTML = '';

@@ -1,0 +1,36 @@
+{
+  "system": "tamld-homelab-core",
+  "version": "2026.10",
+  "status": "OPERATIONAL",
+  "dual_plane": {
+    "lan": "UP",
+    "wan": "UP",
+    "probe_latency_ms": 142,
+    "uptime_kuma": "DUAL-PROBE:3001",
+    "edge_reachability": "https://*.edge.internal"
+  },
+  "substrate": {
+    "hypervisor": "Proxmox VE 8.x (Node 1)",
+    "cpu": "Intel Core i5-8500 (6 Cores @ 3.00GHz - 4.10GHz)",
+    "ram_total_gb": 16,
+    "ram_allocated_gb": 11,
+    "ram_free_gb": 5,
+    "storage": "ZFS Pool (RAID-1 mirror NVMe + SATA)",
+    "containers_active": 15,
+    "vms_active": 1
+  },
+  "networking": {
+    "gateway": "MikroTik hEX S / RouterOS v7",
+    "dhcp_lease_authority": "RouterOS 10.0.0.1 (Single Source of Truth)",
+    "ingress": "Traefik v3 (Ports 80/443 proxied via Cloudflare IP ranges)",
+    "zero_wan_management": true,
+    "remote_mesh": "Tailscale Overlay (Overlay Mesh)"
+  },
+  "observability": {
+    "engine": "VictoriaLogs (LOG-SINK:9428)",
+    "query_language": "LogSQL",
+    "triage_latency": "<2s fast batch telemetry",
+    "audit_compliance": "100% Deterministic ADLC / Zero-Leakage DLP"
+  },
+  "verified_at": "2026-10-08T00:00:00Z"
+}

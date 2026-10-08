@@ -104,6 +104,10 @@ With over 11 years in enterprise IT operations, bare-metal virtualization, and n
 4. Fast Batch Telemetry Law:
    Incident triage scripts must avoid sequential SSH loops. Fleet triage uses sub-2-second batch queries and LogSQL filtering to resolve root causes under pressure.
 
+5. Machine-Readable Telemetry Invariant:
+   A sanitized JSON snapshot of the active homelab state (hypervisor, memory budget, dual-plane monitoring, and network authority) is published at:
+   https://tamld.github.io/data/telemetry.json
+
 ---
 
 ## 6. Contact & Collaboration

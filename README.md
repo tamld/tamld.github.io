@@ -7,22 +7,28 @@
 - **Dual-Track Competency**: 11+ years of bare-metal enterprise IT operations & infrastructure paired with AI Systems Engineering & Agentic Harnesses.
 - **Interactive Terminal Widget**: Client-side Vanilla JS terminal simulator (`tamld --whoami`, `tamld --skills`, `tamld --homelab`, `tamld --projects`).
 - **Machine-Readable Standard (`llms.txt`)**: Fully compliant with [llmstxt.org](https://llmstxt.org/) specification for zero-overhead LLM / AI Agent context ingestion.
-- **Zero-Build & Zero-Dependency**: Single-file HTML5 + Tailwind CSS CDN, sub-100ms FCP, zero npm dependencies, hosted on GitHub Pages CDN.
+- **Zero-Build & Zero-CDN Icons**: Standalone single-file HTML5 with self-contained inline SVG sprites, Schema.org JSON-LD entity graph, sub-100ms FCP, and zero external icon CDN dependencies.
+- **Decoupled SRE Telemetry**: Live machine-readable JSON telemetry feed (`/data/telemetry.json`) consumed by terminal emulator commands.
 
 ## 📂 Key Files
-- `index.html`: Main visual portfolio interface.
+- `index.html`: Main visual portfolio interface with Schema.org JSON-LD and self-contained SVGs.
+- `data/telemetry.json`: Sanitized bare-metal homelab SRE telemetry snapshot (`https://tamld.github.io/data/telemetry.json`).
 - `llms.txt`: Curated markdown summary and index for AI agents (`https://tamld.github.io/llms.txt`).
 - `llms-full.txt`: Comprehensive single-file technical dossier and career history (`https://tamld.github.io/llms-full.txt`).
 - `.nojekyll`: Disables Jekyll parsing on GitHub Pages.
+- `.githooks/pre-commit`: Deterministic git hook preventing gradients, blur, and persona hallucinations.
 
 ## 🌐 Machine Consumption
-Any LLM or autonomous agent can fetch Tam's verified profile directly via:
+Any LLM, scraper, or autonomous agent can query Tam's verified profile directly via:
 ```bash
+# Curated LLM index
 curl -sL https://tamld.github.io/llms.txt
-```
-or for the full dossier:
-```bash
+
+# Full engineering dossier
 curl -sL https://tamld.github.io/llms-full.txt
+
+# Live homelab SRE telemetry
+curl -sL https://tamld.github.io/data/telemetry.json
 ```
 
 ---

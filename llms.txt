@@ -23,8 +23,9 @@ Tam approaches AI not as prompt-driven magic, but as an untrusted, high-velocity
 - [Hardware Reality Invariant](https://tamld.github.io/llms-full.txt#invariants): Compute capacity is bound by physical host memory and thermal budgets. Never hallucinate ghost capacity.
 - [Dual-Plane Observability](https://tamld.github.io/llms-full.txt#invariants): Public edge reachability (WAN) and internal compute health (LAN) must be decoupled to isolate routing and ingress failures instantly.
 
-## Comprehensive Profile
+## Machine Endpoints & Telemetry
 - [Full LLM Dossier (llms-full.txt)](https://tamld.github.io/llms-full.txt): Complete unabridged technical dossier, career history, homelab topology, and skills graph for deep context ingestion.
+- [Live SRE Telemetry (JSON)](https://tamld.github.io/data/telemetry.json): Sanitized machine-readable JSON status of bare-metal hypervisor, dual-plane health, and networking substrate.
 
 ## Contact & Public Verification
 - [GitHub](https://github.com/tamld): Primary code forge with public runtimes, PRs, and IaC blueprints.
