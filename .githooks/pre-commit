@@ -4,21 +4,21 @@
 
 set -euo pipefail
 
-echo "==> [Gate 1/5] Checking Zero Gradient & Anti-Blur Invariants..."
+echo "==> [Gate 1/6] Checking Zero Gradient & Anti-Blur Invariants..."
 if grep -Ei "linear-gradient|radial-gradient|backdrop-blur" index.html; then
   echo "❌ FAIL: Gradients or backdrop-blur detected in index.html. Follow Zero Gradient Law!"
   exit 1
 fi
 echo "    PASS: Pure solid surfaces enforced."
 
-echo "==> [Gate 2/5] Checking Epistemic Integrity & Zero Hallucination..."
+echo "==> [Gate 2/6] Checking Epistemic Integrity & Zero Hallucination..."
 if grep -ri "SGH Asia" index.html llms.txt llms-full.txt README.md; then
   echo "❌ FAIL: Hallucinated mock interview persona 'SGH Asia' detected! Use SSoT titles only."
   exit 1
 fi
 echo "    PASS: Zero unverified persona hallucinations."
 
-echo "==> [Gate 3/5] Validating Machine-Readable Standards..."
+echo "==> [Gate 3/6] Validating Machine-Readable Standards..."
 if ! test -f llms.txt || ! test -f llms-full.txt; then
   echo "❌ FAIL: Missing llms.txt or llms-full.txt at root!"
   exit 1
@@ -29,14 +29,14 @@ if ! test -f .nojekyll; then
 fi
 echo "    PASS: llms.txt, llms-full.txt, and .nojekyll verified."
 
-echo "==> [Gate 4/5] Validating Telemetry JSON Integrity..."
+echo "==> [Gate 4/6] Validating Telemetry JSON Integrity..."
 if ! python3 -m json.tool data/telemetry.json > /dev/null; then
   echo "❌ FAIL: data/telemetry.json is not valid JSON!"
   exit 1
 fi
 echo "    PASS: data/telemetry.json syntax validated."
 
-echo "==> [Gate 5/5] Validating Schema.org Structured Data & Standalone SVGs..."
+echo "==> [Gate 5/6] Validating Schema.org Structured Data & Standalone SVGs..."
 if ! grep -q 'application/ld+json' index.html; then
   echo "❌ FAIL: Missing Schema.org JSON-LD in index.html!"
   exit 1
@@ -47,5 +47,16 @@ if grep -i "lucide" index.html; then
 fi
 echo "    PASS: Schema.org JSON-LD and self-contained SVGs verified."
 
-echo "✅ ALL PRE-COMMIT GATES PASSED DETERMINISTICALLY."
+echo "==> [Gate 6/6] Validating Browser Favicons & Touch Icons..."
+if ! test -f favicon.svg || ! test -f favicon.ico || ! test -f apple-touch-icon.png; then
+  echo "❌ FAIL: Missing favicon assets (favicon.svg, favicon.ico, apple-touch-icon.png)!"
+  exit 1
+fi
+if ! grep -q 'rel="icon"' index.html; then
+  echo "❌ FAIL: Missing rel=\"icon\" in index.html!"
+  exit 1
+fi
+echo "    PASS: Favicon suite and webmanifest verified."
+
+echo "✅ ALL 6 PRE-COMMIT GATES PASSED DETERMINISTICALLY."
 exit 0
