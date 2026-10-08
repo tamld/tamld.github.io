@@ -329,13 +329,58 @@
     <!-- ASYMMETRIC BENTO GRID: 1 MASTERPIECE + MODULAR SATELLITES (ZERO GRADIENT) -->
     <section id="systems" class="space-y-6">
       
-      <div class="space-y-1">
-        <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-zinc-100">
-          Featured Engineered Systems
-        </h2>
-        <p class="text-xs sm:text-sm text-zinc-400">
-          Physical codebases, reproducible receipts, zero ghost capacity.
-        </p>
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+        <div class="space-y-1">
+          <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-zinc-100">
+            Featured Engineered Systems
+          </h2>
+          <p class="text-xs sm:text-sm text-zinc-400">
+            Physical codebases, reproducible receipts, zero ghost capacity.
+          </p>
+        </div>
+
+        <!-- Interactive Topology Trigger -->
+        <button id="toggle-topology-btn" onclick="toggleTopologyDrawer()" class="inline-flex items-center gap-2 px-3 py-1.5 rounded bg-panel border border-borderSubtle hover:border-accentLight text-xs font-mono text-zinc-300 hover:text-white transition-all group" title="Toggle Architecture Topology Diagram">
+          <span class="w-2 h-2 rounded-full bg-signalGreen"></span>
+          <span>Inspect Architecture Topology</span>
+          <svg id="topology-chevron" class="w-3.5 h-3.5 text-zinc-500 group-hover:text-accentLight transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+      </div>
+
+      <!-- Collapsible Topology Drawer (Zero Gradient, Responsive) -->
+      <div id="topology-drawer" class="hidden rounded-lg bg-panel border border-borderSubtle p-4 sm:p-6 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-borderHairline pb-3 text-xs font-mono">
+          <div class="flex items-center gap-2 text-zinc-200">
+            <span class="font-bold text-accentLight">PROD TOPOLOGY</span>
+            <span class="text-zinc-600">/</span>
+            <span class="text-zinc-400">Dual-Plane Ingress &amp; Observability</span>
+          </div>
+          <div class="flex flex-wrap items-center gap-3 text-[11px] text-zinc-400">
+            <span class="inline-flex items-center gap-1"><span class="w-2 h-2 bg-[#38bdf8] inline-block"></span> WAN Ingress</span>
+            <span class="inline-flex items-center gap-1"><span class="w-2 h-2 bg-[#10b981] inline-block"></span> [LAN] Probes</span>
+            <span class="inline-flex items-center gap-1"><span class="w-2 h-2 bg-[#f59e0b] inline-block"></span> 2FA Auth Barrier</span>
+            <a href="/assets/diagrams/arch-dualplane-topology.svg" target="_blank" class="text-accentLight hover:underline ml-2">Open Raw SVG ↗</a>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto rounded bg-canvas border border-borderHairline p-2">
+          <img src="/assets/diagrams/arch-dualplane-topology.svg" alt="Homelab Dual-Plane Ingress and Observability Architecture Topology" class="w-full min-w-[760px] h-auto block" loading="lazy">
+        </div>
+
+        <div class="grid sm:grid-cols-3 gap-3 text-[11px] font-mono text-zinc-400 pt-2 border-t border-borderHairline">
+          <div>
+            <span class="text-zinc-200 font-semibold">1. Single DHCP Authority:</span>
+            MikroTik RouterOS binds static MAC-to-IP leases. PVE containers strictly declare <code class="text-accentLight">net0: ip=dhcp</code>.
+          </div>
+          <div>
+            <span class="text-zinc-200 font-semibold">2. Zero-WAN Ingress:</span>
+            PVE Hypervisor &amp; RouterOS locked to Tailscale. Only Traefik 80/443 exposed via Cloudflare IP ranges.
+          </div>
+          <div>
+            <span class="text-zinc-200 font-semibold">3. Dual-Plane Invariant:</span>
+            <code class="text-signalGreen">LAN=UP &amp;&amp; WAN=DOWN</code> immediately isolates routing/TLS/WAF failures without manual host SSH loops.
+          </div>
+        </div>
       </div>
 
       <div class="grid lg:grid-cols-12 gap-4">
@@ -725,6 +770,19 @@
     // Initialize Chapter 0
     switchChapter(0);
 
+    function toggleTopologyDrawer() {
+      const drawer = document.getElementById('topology-drawer');
+      const chevron = document.getElementById('topology-chevron');
+      if (!drawer) return;
+      if (drawer.classList.contains('hidden')) {
+        drawer.classList.remove('hidden');
+        if (chevron) chevron.classList.add('rotate-180');
+      } else {
+        drawer.classList.add('hidden');
+        if (chevron) chevron.classList.remove('rotate-180');
+      }
+    }
+
     function copyCurl() {
       const text = document.getElementById('curl-cmd').innerText;
       navigator.clipboard.writeText(text).then(() => {
@@ -743,15 +801,35 @@
     const CMDS = {
       'help': () => `
 <div class="text-zinc-400 space-y-0.5">
-  <div><span class="text-accentLight">story</span>      - 11-year evolution & human-AI symbiosis chronicle</div>
-  <div><span class="text-accentLight">skills</span>     - Dual-track technical capabilities</div>
-  <div><span class="text-accentLight">homelab</span>    - Bare-metal Proxmox & network topology</div>
-  <div><span class="text-accentLight">status</span>     - Dual-plane observability heartbeat</div>
-  <div><span class="text-accentLight">telemetry</span>  - Raw JSON SRE telemetry payload</div>
-  <div><span class="text-accentLight">projects</span>   - Flagship open-source repositories</div>
-  <div><span class="text-accentLight">contact</span>    - Direct channels & verified profiles</div>
-  <div><span class="text-accentLight">clear</span>      - Reset terminal screen</div>
+  <div><span class="text-accentLight">topology</span>  - Dual-plane homelab architecture diagram</div>
+  <div><span class="text-accentLight">story</span>     - 11-year evolution & human-AI symbiosis chronicle</div>
+  <div><span class="text-accentLight">skills</span>    - Dual-track technical capabilities</div>
+  <div><span class="text-accentLight">homelab</span>   - Bare-metal Proxmox & network topology</div>
+  <div><span class="text-accentLight">status</span>    - Dual-plane observability heartbeat</div>
+  <div><span class="text-accentLight">telemetry</span> - Raw JSON SRE telemetry payload</div>
+  <div><span class="text-accentLight">projects</span>  - Flagship open-source repositories</div>
+  <div><span class="text-accentLight">contact</span>   - Direct channels & verified profiles</div>
+  <div><span class="text-accentLight">clear</span>     - Reset terminal screen</div>
 </div>`,
+
+      'tamld --topology': () => {
+        const drawer = document.getElementById('topology-drawer');
+        const chevron = document.getElementById('topology-chevron');
+        if (drawer && drawer.classList.contains('hidden')) {
+          drawer.classList.remove('hidden');
+          if (chevron) chevron.classList.add('rotate-180');
+        }
+        return `
+<div class="text-zinc-300 space-y-1 pl-2 border-l border-borderSubtle">
+  <div class="text-accentLight font-semibold">[Architecture Topology Drawer Opened]</div>
+  <div>• Vector Asset: <a href="/assets/diagrams/arch-dualplane-topology.svg" target="_blank" class="text-accentLight underline">/assets/diagrams/arch-dualplane-topology.svg</a></div>
+  <div>• Perimeter: Cloudflare WAF ➔ Traefik EDGE-PROXY (80/443) ➔ Authelia IAM-AUTH 2FA</div>
+  <div>• Authority: MikroTik RouterOS (10.0.0.1) Static DHCP SSoT</div>
+  <div>• Observability: Dual-Plane Kuma DUAL-PROBE ([LAN] + [WAN]) ➔ VictoriaLogs LOG-SINK</div>
+</div>`;
+      },
+
+      'topology': () => CMDS['tamld --topology'](),
 
       'tamld --story': () => `
 <div class="text-zinc-300 space-y-1.5 pl-2 border-l border-borderSubtle">

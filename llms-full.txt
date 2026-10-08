@@ -108,6 +108,11 @@ With over 11 years in enterprise IT operations, bare-metal virtualization, and n
    A sanitized JSON snapshot of the active homelab state (hypervisor, memory budget, dual-plane monitoring, and network authority) is published at:
    https://tamld.github.io/data/telemetry.json
 
+6. Visual Architecture Topology & Vector Asset Invariant:
+   An authoritative, code-compiled vector diagram illustrating edge ingress (Cloudflare WAF), reverse proxy (EDGE-PROXY Traefik), forward authentication (IAM-AUTH Authelia), single DHCP authority (MikroTik RouterOS 10.0.0.1), and dual-plane observability (DUAL-PROBE Uptime Kuma) is published at:
+   https://tamld.github.io/assets/diagrams/arch-dualplane-topology.svg
+   The asset adheres strictly to the Zero Gradient Law (pure flat industrial fills) and under 25KB byte budget.
+
 ---
 
 ## 7. The Evolution: 11 Years in the Trenches to the Symbiotic Frontier
